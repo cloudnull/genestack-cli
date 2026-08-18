@@ -15,8 +15,8 @@
     }
   },
   "generatedSourceTargetSet" : [
-    "GenerateDoccReference",
-    "GenerateManual"
+    "GenerateManual",
+    "GenerateDoccReference"
   ],
   "pluginDescriptions" : [
     {
@@ -1605,6 +1605,140 @@
       "tempsPath" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/GenestackSpecTests.build",
       "wholeModuleOptimization" : false
     },
+    "C.GenestackUtilsTests-arm64-apple-macosx-debug.module" : {
+      "executable" : "/Users/kevin.carter/Library/Developer/Toolchains/swift-6.3.2-RELEASE.xctoolchain/usr/bin/swiftc",
+      "fileList" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/GenestackUtilsTests.build/sources",
+      "importPath" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/Tests/GenestackUtilsTests/ComponentsGeneratorTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/Tests/GenestackUtilsTests/InventoryGeneratorTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/Tests/GenestackUtilsTests/ServiceCatalogTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/Tests/GenestackUtilsTests/ServiceDependencyResolverTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/swift-version--326B47534E8ADC21.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genectl"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/GenestackUtilsTests.build/sources"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "GenestackUtilsTests",
+      "moduleOutputPath" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/Modules/GenestackUtilsTests.swiftmodule",
+      "objects" : [
+        "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/GenestackUtilsTests.build/ComponentsGeneratorTests.swift.o",
+        "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/GenestackUtilsTests.build/InventoryGeneratorTests.swift.o",
+        "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/GenestackUtilsTests.build/ServiceCatalogTests.swift.o",
+        "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/GenestackUtilsTests.build/ServiceDependencyResolverTests.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx14.0",
+        "-incremental",
+        "-enable-batch-mode",
+        "-serialize-diagnostics",
+        "-index-store-path",
+        "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-Xfrontend",
+        "-enable-cross-import-overlays",
+        "-j10",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+        "-Xcc",
+        "-fmodule-map-file=/Users/kevin.carter/projects/genestack-ctl/.build/checkouts/Yams/Sources/CYaml/include/module.modulemap",
+        "-Xcc",
+        "-I",
+        "-Xcc",
+        "/Users/kevin.carter/projects/genestack-ctl/.build/checkouts/Yams/Sources/CYaml/include",
+        "-module-cache-path",
+        "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-swift-version",
+        "6",
+        "-I",
+        "/Users/kevin.carter/Library/Developer/Toolchains/swift-6.3.2-RELEASE.xctoolchain/usr/lib/swift/macosx/testing",
+        "-L",
+        "/Users/kevin.carter/Library/Developer/Toolchains/swift-6.3.2-RELEASE.xctoolchain/usr/lib/swift/macosx/testing",
+        "-plugin-path",
+        "/Users/kevin.carter/Library/Developer/Toolchains/swift-6.3.2-RELEASE.xctoolchain/usr/lib/swift/host/plugins/testing",
+        "-sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-I",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-package-name",
+        "genestack_ctl"
+      ],
+      "outputFileMapPath" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/GenestackUtilsTests.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/GenestackUtilsTests.build/ComponentsGeneratorTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/GenestackUtilsTests.build/InventoryGeneratorTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/GenestackUtilsTests.build/ServiceCatalogTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/GenestackUtilsTests.build/ServiceDependencyResolverTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/Modules/GenestackUtilsTests.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : false,
+      "sources" : [
+        "/Users/kevin.carter/projects/genestack-ctl/Tests/GenestackUtilsTests/ComponentsGeneratorTests.swift",
+        "/Users/kevin.carter/projects/genestack-ctl/Tests/GenestackUtilsTests/InventoryGeneratorTests.swift",
+        "/Users/kevin.carter/projects/genestack-ctl/Tests/GenestackUtilsTests/ServiceCatalogTests.swift",
+        "/Users/kevin.carter/projects/genestack-ctl/Tests/GenestackUtilsTests/ServiceDependencyResolverTests.swift"
+      ],
+      "tempsPath" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/GenestackUtilsTests.build",
+      "wholeModuleOptimization" : false
+    },
     "C.Yams-arm64-apple-macosx-debug.module" : {
       "executable" : "/Users/kevin.carter/Library/Developer/Toolchains/swift-6.3.2-RELEASE.xctoolchain/usr/bin/swiftc",
       "fileList" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/Yams.build/sources",
@@ -2928,6 +3062,10 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/Modules/GenestackUtilsTests.swiftmodule"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/Modules/GenestackSpecTests.swiftmodule"
         },
         {
@@ -3029,7 +3167,83 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Commands/ApplyCommand.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Commands/ConfigCommands.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Commands/InstallCommand.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Commands/NodeCommands.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Commands/SecretCommands.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Commands/ServiceCommands.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Components/ComponentsGenerator.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Inventory/InventoryGenerator.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Inventory/InventoryModel.swift"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Models/ClusterSpec.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Orchestration/FailureHandler.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Orchestration/PipelineExecutor.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Orchestration/ServiceInstaller.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Overrides/OverridesManager.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Secrets/SecretAnalyzer.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Secrets/SecretOwnershipMap.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Services/ServiceCatalog.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Services/ServiceDependencyResolver.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Services/ServiceInfo.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Utilities/EnvironmentManager.swift"
         },
         {
           "kind" : "file",
@@ -3038,6 +3252,10 @@
         {
           "kind" : "file",
           "name" : "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Utilities/Subprocess.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Wizard/Wizard.swift"
         },
         {
           "kind" : "file",
@@ -3061,9 +3279,29 @@
       "moduleOutputPath" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/Modules/genestackctl.swiftmodule",
       "objects" : [
         "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/CLI.swift.o",
+        "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/ApplyCommand.swift.o",
+        "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/ConfigCommands.swift.o",
+        "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/InstallCommand.swift.o",
+        "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/NodeCommands.swift.o",
+        "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/SecretCommands.swift.o",
+        "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/ServiceCommands.swift.o",
+        "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/ComponentsGenerator.swift.o",
+        "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/InventoryGenerator.swift.o",
+        "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/InventoryModel.swift.o",
         "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/ClusterSpec.swift.o",
+        "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/FailureHandler.swift.o",
+        "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/PipelineExecutor.swift.o",
+        "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/ServiceInstaller.swift.o",
+        "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/OverridesManager.swift.o",
+        "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/SecretAnalyzer.swift.o",
+        "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/SecretOwnershipMap.swift.o",
+        "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/ServiceCatalog.swift.o",
+        "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/ServiceDependencyResolver.swift.o",
+        "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/ServiceInfo.swift.o",
+        "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/EnvironmentManager.swift.o",
         "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/SpecValidator.swift.o",
-        "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/Subprocess.swift.o"
+        "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/Subprocess.swift.o",
+        "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/Wizard.swift.o"
       ],
       "otherArguments" : [
         "-target",
@@ -3132,7 +3370,83 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/ApplyCommand.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/ConfigCommands.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/InstallCommand.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/NodeCommands.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/SecretCommands.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/ServiceCommands.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/ComponentsGenerator.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/InventoryGenerator.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/InventoryModel.swift.o"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/ClusterSpec.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/FailureHandler.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/PipelineExecutor.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/ServiceInstaller.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/OverridesManager.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/SecretAnalyzer.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/SecretOwnershipMap.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/ServiceCatalog.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/ServiceDependencyResolver.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/ServiceInfo.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/EnvironmentManager.swift.o"
         },
         {
           "kind" : "file",
@@ -3144,15 +3458,39 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/Wizard.swift.o"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/Modules/genestackctl.swiftmodule"
         }
       ],
       "prepareForIndexing" : false,
       "sources" : [
         "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/CLI.swift",
+        "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Commands/ApplyCommand.swift",
+        "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Commands/ConfigCommands.swift",
+        "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Commands/InstallCommand.swift",
+        "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Commands/NodeCommands.swift",
+        "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Commands/SecretCommands.swift",
+        "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Commands/ServiceCommands.swift",
+        "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Components/ComponentsGenerator.swift",
+        "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Inventory/InventoryGenerator.swift",
+        "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Inventory/InventoryModel.swift",
         "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Models/ClusterSpec.swift",
+        "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Orchestration/FailureHandler.swift",
+        "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Orchestration/PipelineExecutor.swift",
+        "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Orchestration/ServiceInstaller.swift",
+        "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Overrides/OverridesManager.swift",
+        "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Secrets/SecretAnalyzer.swift",
+        "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Secrets/SecretOwnershipMap.swift",
+        "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Services/ServiceCatalog.swift",
+        "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Services/ServiceDependencyResolver.swift",
+        "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Services/ServiceInfo.swift",
+        "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Utilities/EnvironmentManager.swift",
         "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Utilities/SpecValidator.swift",
-        "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Utilities/Subprocess.swift"
+        "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Utilities/Subprocess.swift",
+        "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Wizard/Wizard.swift"
       ],
       "tempsPath" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build",
       "wholeModuleOptimization" : false
@@ -3357,6 +3695,78 @@
       "/Users/kevin.carter/projects/genestack-ctl/Tests/GenestackSpecTests/ClusterSpecTests.swift",
       "/Users/kevin.carter/projects/genestack-ctl/Tests/GenestackSpecTests/GenestackSpecTests.swift",
       "/Users/kevin.carter/projects/genestack-ctl/Tests/GenestackSpecTests/SpecValidatorTests.swift",
+      "-I",
+      "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/Modules",
+      "-target",
+      "arm64-apple-macosx14.0",
+      "-incremental",
+      "-enable-batch-mode",
+      "-serialize-diagnostics",
+      "-index-store-path",
+      "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-Xfrontend",
+      "-enable-cross-import-overlays",
+      "-j10",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+      "-Xcc",
+      "-fmodule-map-file=/Users/kevin.carter/projects/genestack-ctl/.build/checkouts/Yams/Sources/CYaml/include/module.modulemap",
+      "-Xcc",
+      "-I",
+      "-Xcc",
+      "/Users/kevin.carter/projects/genestack-ctl/.build/checkouts/Yams/Sources/CYaml/include",
+      "-module-cache-path",
+      "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-parse-as-library",
+      "-swift-version",
+      "6",
+      "-I",
+      "/Users/kevin.carter/Library/Developer/Toolchains/swift-6.3.2-RELEASE.xctoolchain/usr/lib/swift/macosx/testing",
+      "-L",
+      "/Users/kevin.carter/Library/Developer/Toolchains/swift-6.3.2-RELEASE.xctoolchain/usr/lib/swift/macosx/testing",
+      "-plugin-path",
+      "/Users/kevin.carter/Library/Developer/Toolchains/swift-6.3.2-RELEASE.xctoolchain/usr/lib/swift/host/plugins/testing",
+      "-sdk",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-I",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-L",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-package-name",
+      "genestack_ctl",
+      "-driver-use-frontend-path",
+      "/Users/kevin.carter/Library/Developer/Toolchains/swift-6.3.2-RELEASE.xctoolchain/usr/bin/swiftc"
+    ],
+    "GenestackUtilsTests" : [
+      "/Users/kevin.carter/Library/Developer/Toolchains/swift-6.3.2-RELEASE.xctoolchain/usr/bin/swiftc",
+      "-module-name",
+      "GenestackUtilsTests",
+      "-package-name",
+      "genestack_ctl",
+      "-c",
+      "/Users/kevin.carter/projects/genestack-ctl/Tests/GenestackUtilsTests/ComponentsGeneratorTests.swift",
+      "/Users/kevin.carter/projects/genestack-ctl/Tests/GenestackUtilsTests/InventoryGeneratorTests.swift",
+      "/Users/kevin.carter/projects/genestack-ctl/Tests/GenestackUtilsTests/ServiceCatalogTests.swift",
+      "/Users/kevin.carter/projects/genestack-ctl/Tests/GenestackUtilsTests/ServiceDependencyResolverTests.swift",
       "-I",
       "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/Modules",
       "-target",
@@ -3742,9 +4152,29 @@
       "genestack_ctl",
       "-c",
       "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/CLI.swift",
+      "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Commands/ApplyCommand.swift",
+      "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Commands/ConfigCommands.swift",
+      "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Commands/InstallCommand.swift",
+      "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Commands/NodeCommands.swift",
+      "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Commands/SecretCommands.swift",
+      "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Commands/ServiceCommands.swift",
+      "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Components/ComponentsGenerator.swift",
+      "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Inventory/InventoryGenerator.swift",
+      "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Inventory/InventoryModel.swift",
       "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Models/ClusterSpec.swift",
+      "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Orchestration/FailureHandler.swift",
+      "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Orchestration/PipelineExecutor.swift",
+      "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Orchestration/ServiceInstaller.swift",
+      "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Overrides/OverridesManager.swift",
+      "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Secrets/SecretAnalyzer.swift",
+      "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Secrets/SecretOwnershipMap.swift",
+      "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Services/ServiceCatalog.swift",
+      "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Services/ServiceDependencyResolver.swift",
+      "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Services/ServiceInfo.swift",
+      "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Utilities/EnvironmentManager.swift",
       "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Utilities/SpecValidator.swift",
       "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Utilities/Subprocess.swift",
+      "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Wizard/Wizard.swift",
       "-I",
       "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/Modules",
       "-target",
@@ -3825,6 +4255,13 @@
       "ArgumentParser",
       "ArgumentParserToolInfo"
     ],
+    "GenestackUtilsTests" : [
+      "genestackctl",
+      "Yams",
+      "CYaml",
+      "ArgumentParser",
+      "ArgumentParserToolInfo"
+    ],
     "Yams" : [
       "CYaml"
     ],
@@ -3838,6 +4275,7 @@
     ],
     "genestackPackageTests" : [
       "GenestackSpecTests",
+      "GenestackUtilsTests",
       "genestackctl",
       "Yams",
       "CYaml",
@@ -4359,6 +4797,32 @@
       ],
       "outputFilePath" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/GenestackSpecTests.build/sources"
     },
+    "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/GenestackUtilsTests.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/Tests/GenestackUtilsTests/ComponentsGeneratorTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/Tests/GenestackUtilsTests/InventoryGeneratorTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/Tests/GenestackUtilsTests/ServiceCatalogTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/Tests/GenestackUtilsTests/ServiceDependencyResolverTests.swift"
+        }
+      ],
+      "outputFilePath" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/GenestackUtilsTests.build/sources"
+    },
     "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/Yams.build/sources" : {
       "alwaysOutOfDate" : false,
       "inputs" : [
@@ -4748,6 +5212,10 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/ApplyCommand.swift.o"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/CLI.swift.o"
         },
         {
@@ -4756,11 +5224,87 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/ComponentsGenerator.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/ConfigCommands.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/EnvironmentManager.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/FailureHandler.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/InstallCommand.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/InventoryGenerator.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/InventoryModel.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/NodeCommands.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/OverridesManager.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/PipelineExecutor.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/SecretAnalyzer.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/SecretCommands.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/SecretOwnershipMap.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/ServiceCatalog.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/ServiceCommands.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/ServiceDependencyResolver.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/ServiceInfo.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/ServiceInstaller.swift.o"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/SpecValidator.swift.o"
         },
         {
           "kind" : "file",
           "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/Subprocess.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/Wizard.swift.o"
         }
       ],
       "outputFilePath" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genectl.product/Objects.LinkFileList"
@@ -6548,6 +7092,22 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/GenestackUtilsTests.build/ComponentsGeneratorTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/GenestackUtilsTests.build/InventoryGeneratorTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/GenestackUtilsTests.build/ServiceCatalogTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/GenestackUtilsTests.build/ServiceDependencyResolverTests.swift.o"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/Yams.build/Constructor.swift.o"
         },
         {
@@ -6612,6 +7172,10 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/ApplyCommand.swift.o"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/CLI.swift.o"
         },
         {
@@ -6620,11 +7184,87 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/ComponentsGenerator.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/ConfigCommands.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/EnvironmentManager.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/FailureHandler.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/InstallCommand.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/InventoryGenerator.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/InventoryModel.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/NodeCommands.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/OverridesManager.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/PipelineExecutor.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/SecretAnalyzer.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/SecretCommands.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/SecretOwnershipMap.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/ServiceCatalog.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/ServiceCommands.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/ServiceDependencyResolver.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/ServiceInfo.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/ServiceInstaller.swift.o"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/SpecValidator.swift.o"
         },
         {
           "kind" : "file",
           "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/Subprocess.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/Wizard.swift.o"
         }
       ],
       "outputFilePath" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackPackageTests.product/Objects.LinkFileList"
@@ -6642,7 +7282,83 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Commands/ApplyCommand.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Commands/ConfigCommands.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Commands/InstallCommand.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Commands/NodeCommands.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Commands/SecretCommands.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Commands/ServiceCommands.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Components/ComponentsGenerator.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Inventory/InventoryGenerator.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Inventory/InventoryModel.swift"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Models/ClusterSpec.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Orchestration/FailureHandler.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Orchestration/PipelineExecutor.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Orchestration/ServiceInstaller.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Overrides/OverridesManager.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Secrets/SecretAnalyzer.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Secrets/SecretOwnershipMap.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Services/ServiceCatalog.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Services/ServiceDependencyResolver.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Services/ServiceInfo.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Utilities/EnvironmentManager.swift"
         },
         {
           "kind" : "file",
@@ -6651,6 +7367,10 @@
         {
           "kind" : "file",
           "name" : "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Utilities/Subprocess.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Wizard/Wizard.swift"
         }
       ],
       "outputFilePath" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/sources"

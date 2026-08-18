@@ -11,15 +11,15 @@ import Yams
 // MARK: - Top-Level Spec
 
 struct ClusterSpec: Codable, Equatable {
-    let version: String
-    let metadata: MetadataSpec
-    let overrides: OverridesSpec?
-    let kubernetes: KubernetesSpec?
-    let nodes: [NodeSpec]
-    let network: NetworkSpec?
-    let storage: StorageSpec?
-    let services: [ServiceSpec]
-    let environment: [String: String]?
+    var version: String
+    var metadata: MetadataSpec
+    var overrides: OverridesSpec?
+    var kubernetes: KubernetesSpec?
+    var nodes: [NodeSpec]
+    var network: NetworkSpec?
+    var storage: StorageSpec?
+    var services: [ServiceSpec]
+    var environment: [String: String]?
 }
 
 // MARK: - Metadata

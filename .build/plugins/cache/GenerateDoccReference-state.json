@@ -95,7 +95,7 @@
     "PWD" : "/Users/kevin.carter/projects/genestack-ctl",
     "SDKROOT" : "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk",
     "SHELL" : "/bin/zsh",
-    "SHLVL" : "1",
+    "SHLVL" : "2",
     "SWIFTLY_BIN_DIR" : "/Users/kevin.carter/.swiftly/bin",
     "SWIFTLY_HOME_DIR" : "/Users/kevin.carter/.swiftly",
     "SWIFTLY_PROXY_IN_PROGRESS" : "1",
@@ -111,7 +111,7 @@
     "__CFBundleIdentifier" : "com.cmuxterm.app",
     "__CF_USER_TEXT_ENCODING" : "0x1F6:0x0:0x0"
   },
-  "inputHash" : "0b2e5592da2b427ac12557ec5cf8044eaf7f1d7ce3dfd12ad307575f195b0e17",
+  "inputHash" : "53880363f10fe2ef8ab81571dc0099ae56d750406bec54d8b4f46047d18edddb",
   "output" : "",
   "result" : {
     "exit" : {
