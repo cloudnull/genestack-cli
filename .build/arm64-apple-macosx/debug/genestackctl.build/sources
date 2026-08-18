@@ -1,2 +1,4 @@
 /Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/CLI.swift
+/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Models/ClusterSpec.swift
+/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Utilities/SpecValidator.swift
 /Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Utilities/Subprocess.swift

@@ -15,8 +15,8 @@
     }
   },
   "generatedSourceTargetSet" : [
-    "GenerateManual",
-    "GenerateDoccReference"
+    "GenerateDoccReference",
+    "GenerateManual"
   ],
   "pluginDescriptions" : [
     {
@@ -1488,7 +1488,15 @@
       "inputs" : [
         {
           "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/Tests/GenestackSpecTests/ClusterSpecTests.swift"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/kevin.carter/projects/genestack-ctl/Tests/GenestackSpecTests/GenestackSpecTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/Tests/GenestackSpecTests/SpecValidatorTests.swift"
         },
         {
           "kind" : "file",
@@ -1507,7 +1515,9 @@
       "moduleName" : "GenestackSpecTests",
       "moduleOutputPath" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/Modules/GenestackSpecTests.swiftmodule",
       "objects" : [
-        "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/GenestackSpecTests.build/GenestackSpecTests.swift.o"
+        "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/GenestackSpecTests.build/ClusterSpecTests.swift.o",
+        "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/GenestackSpecTests.build/GenestackSpecTests.swift.o",
+        "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/GenestackSpecTests.build/SpecValidatorTests.swift.o"
       ],
       "otherArguments" : [
         "-target",
@@ -1571,7 +1581,15 @@
       "outputs" : [
         {
           "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/GenestackSpecTests.build/ClusterSpecTests.swift.o"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/GenestackSpecTests.build/GenestackSpecTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/GenestackSpecTests.build/SpecValidatorTests.swift.o"
         },
         {
           "kind" : "file",
@@ -1580,7 +1598,9 @@
       ],
       "prepareForIndexing" : false,
       "sources" : [
-        "/Users/kevin.carter/projects/genestack-ctl/Tests/GenestackSpecTests/GenestackSpecTests.swift"
+        "/Users/kevin.carter/projects/genestack-ctl/Tests/GenestackSpecTests/ClusterSpecTests.swift",
+        "/Users/kevin.carter/projects/genestack-ctl/Tests/GenestackSpecTests/GenestackSpecTests.swift",
+        "/Users/kevin.carter/projects/genestack-ctl/Tests/GenestackSpecTests/SpecValidatorTests.swift"
       ],
       "tempsPath" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/GenestackSpecTests.build",
       "wholeModuleOptimization" : false
@@ -3009,6 +3029,14 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Models/ClusterSpec.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Utilities/SpecValidator.swift"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Utilities/Subprocess.swift"
         },
         {
@@ -3033,6 +3061,8 @@
       "moduleOutputPath" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/Modules/genestackctl.swiftmodule",
       "objects" : [
         "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/CLI.swift.o",
+        "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/ClusterSpec.swift.o",
+        "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/SpecValidator.swift.o",
         "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/Subprocess.swift.o"
       ],
       "otherArguments" : [
@@ -3102,6 +3132,14 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/ClusterSpec.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/SpecValidator.swift.o"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/Subprocess.swift.o"
         },
         {
@@ -3112,6 +3150,8 @@
       "prepareForIndexing" : false,
       "sources" : [
         "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/CLI.swift",
+        "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Models/ClusterSpec.swift",
+        "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Utilities/SpecValidator.swift",
         "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Utilities/Subprocess.swift"
       ],
       "tempsPath" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build",
@@ -3314,7 +3354,9 @@
       "-package-name",
       "genestack_ctl",
       "-c",
+      "/Users/kevin.carter/projects/genestack-ctl/Tests/GenestackSpecTests/ClusterSpecTests.swift",
       "/Users/kevin.carter/projects/genestack-ctl/Tests/GenestackSpecTests/GenestackSpecTests.swift",
+      "/Users/kevin.carter/projects/genestack-ctl/Tests/GenestackSpecTests/SpecValidatorTests.swift",
       "-I",
       "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/Modules",
       "-target",
@@ -3700,6 +3742,8 @@
       "genestack_ctl",
       "-c",
       "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/CLI.swift",
+      "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Models/ClusterSpec.swift",
+      "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Utilities/SpecValidator.swift",
       "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Utilities/Subprocess.swift",
       "-I",
       "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/Modules",
@@ -4302,7 +4346,15 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/Tests/GenestackSpecTests/ClusterSpecTests.swift"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/kevin.carter/projects/genestack-ctl/Tests/GenestackSpecTests/GenestackSpecTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/Tests/GenestackSpecTests/SpecValidatorTests.swift"
         }
       ],
       "outputFilePath" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/GenestackSpecTests.build/sources"
@@ -4697,6 +4749,14 @@
         {
           "kind" : "file",
           "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/CLI.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/ClusterSpec.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/SpecValidator.swift.o"
         },
         {
           "kind" : "file",
@@ -6476,7 +6536,15 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/GenestackSpecTests.build/ClusterSpecTests.swift.o"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/GenestackSpecTests.build/GenestackSpecTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/GenestackSpecTests.build/SpecValidatorTests.swift.o"
         },
         {
           "kind" : "file",
@@ -6548,6 +6616,14 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/ClusterSpec.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/SpecValidator.swift.o"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/Subprocess.swift.o"
         }
       ],
@@ -6563,6 +6639,14 @@
         {
           "kind" : "file",
           "name" : "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/CLI.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Models/ClusterSpec.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Utilities/SpecValidator.swift"
         },
         {
           "kind" : "file",

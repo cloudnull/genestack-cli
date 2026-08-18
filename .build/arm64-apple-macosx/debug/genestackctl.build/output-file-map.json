@@ -9,6 +9,20 @@
     "swift-dependencies": "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/CLI.swiftdeps",
     "diagnostics": "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/CLI.dia"
   },
+  "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Models/ClusterSpec.swift": {
+    "dependencies": "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/ClusterSpec.d",
+    "object": "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/ClusterSpec.swift.o",
+    "swiftmodule": "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/ClusterSpec~partial.swiftmodule",
+    "swift-dependencies": "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/ClusterSpec.swiftdeps",
+    "diagnostics": "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/ClusterSpec.dia"
+  },
+  "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Utilities/SpecValidator.swift": {
+    "dependencies": "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/SpecValidator.d",
+    "object": "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/SpecValidator.swift.o",
+    "swiftmodule": "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/SpecValidator~partial.swiftmodule",
+    "swift-dependencies": "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/SpecValidator.swiftdeps",
+    "diagnostics": "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/SpecValidator.dia"
+  },
   "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Utilities/Subprocess.swift": {
     "dependencies": "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/Subprocess.d",
     "object": "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/Subprocess.swift.o",

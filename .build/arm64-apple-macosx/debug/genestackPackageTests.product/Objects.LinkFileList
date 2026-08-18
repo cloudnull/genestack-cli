@@ -57,7 +57,9 @@
 /Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/CYaml.build/src/reader.c.o
 /Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/CYaml.build/src/scanner.c.o
 /Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/CYaml.build/src/writer.c.o
+/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/GenestackSpecTests.build/ClusterSpecTests.swift.o
 /Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/GenestackSpecTests.build/GenestackSpecTests.swift.o
+/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/GenestackSpecTests.build/SpecValidatorTests.swift.o
 /Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/Yams.build/Constructor.swift.o
 /Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/Yams.build/Decoder.swift.o
 /Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/Yams.build/Emitter.swift.o
@@ -75,4 +77,6 @@
 /Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/Yams.build/YamlError.swift.o
 /Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackPackageTests.build/runner.swift.o
 /Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/CLI.swift.o
+/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/ClusterSpec.swift.o
+/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/SpecValidator.swift.o
 /Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/Subprocess.swift.o

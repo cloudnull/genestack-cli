@@ -2,11 +2,25 @@
   "": {
     "swift-dependencies": "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/GenestackSpecTests.build/primary.swiftdeps"
   },
+  "/Users/kevin.carter/projects/genestack-ctl/Tests/GenestackSpecTests/ClusterSpecTests.swift": {
+    "dependencies": "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/GenestackSpecTests.build/ClusterSpecTests.d",
+    "object": "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/GenestackSpecTests.build/ClusterSpecTests.swift.o",
+    "swiftmodule": "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/GenestackSpecTests.build/ClusterSpecTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/GenestackSpecTests.build/ClusterSpecTests.swiftdeps",
+    "diagnostics": "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/GenestackSpecTests.build/ClusterSpecTests.dia"
+  },
   "/Users/kevin.carter/projects/genestack-ctl/Tests/GenestackSpecTests/GenestackSpecTests.swift": {
     "dependencies": "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/GenestackSpecTests.build/GenestackSpecTests.d",
     "object": "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/GenestackSpecTests.build/GenestackSpecTests.swift.o",
     "swiftmodule": "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/GenestackSpecTests.build/GenestackSpecTests~partial.swiftmodule",
     "swift-dependencies": "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/GenestackSpecTests.build/GenestackSpecTests.swiftdeps",
     "diagnostics": "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/GenestackSpecTests.build/GenestackSpecTests.dia"
+  },
+  "/Users/kevin.carter/projects/genestack-ctl/Tests/GenestackSpecTests/SpecValidatorTests.swift": {
+    "dependencies": "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/GenestackSpecTests.build/SpecValidatorTests.d",
+    "object": "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/GenestackSpecTests.build/SpecValidatorTests.swift.o",
+    "swiftmodule": "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/GenestackSpecTests.build/SpecValidatorTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/GenestackSpecTests.build/SpecValidatorTests.swiftdeps",
+    "diagnostics": "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/GenestackSpecTests.build/SpecValidatorTests.dia"
   }
 }
