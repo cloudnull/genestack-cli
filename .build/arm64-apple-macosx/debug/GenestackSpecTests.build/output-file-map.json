@@ -1,0 +1,12 @@
+{
+  "": {
+    "swift-dependencies": "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/GenestackSpecTests.build/primary.swiftdeps"
+  },
+  "/Users/kevin.carter/projects/genestack-ctl/Tests/GenestackSpecTests/GenestackSpecTests.swift": {
+    "dependencies": "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/GenestackSpecTests.build/GenestackSpecTests.d",
+    "object": "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/GenestackSpecTests.build/GenestackSpecTests.swift.o",
+    "swiftmodule": "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/GenestackSpecTests.build/GenestackSpecTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/GenestackSpecTests.build/GenestackSpecTests.swiftdeps",
+    "diagnostics": "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/GenestackSpecTests.build/GenestackSpecTests.dia"
+  }
+}

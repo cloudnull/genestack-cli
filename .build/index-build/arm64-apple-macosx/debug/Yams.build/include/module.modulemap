@@ -1,0 +1,3 @@
+module Yams {
+    header "/Users/kevin.carter/projects/genestack-ctl/.build/index-build/arm64-apple-macosx/debug/Yams.build/include/Yams-Swift.h"
+}

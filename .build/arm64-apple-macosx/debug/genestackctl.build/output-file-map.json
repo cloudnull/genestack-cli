@@ -1,0 +1,19 @@
+{
+  "": {
+    "swift-dependencies": "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/primary.swiftdeps"
+  },
+  "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/CLI.swift": {
+    "dependencies": "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/CLI.d",
+    "object": "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/CLI.swift.o",
+    "swiftmodule": "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/CLI~partial.swiftmodule",
+    "swift-dependencies": "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/CLI.swiftdeps",
+    "diagnostics": "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/CLI.dia"
+  },
+  "/Users/kevin.carter/projects/genestack-ctl/Sources/genestackctl/Utilities/Subprocess.swift": {
+    "dependencies": "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/Subprocess.d",
+    "object": "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/Subprocess.swift.o",
+    "swiftmodule": "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/Subprocess~partial.swiftmodule",
+    "swift-dependencies": "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/Subprocess.swiftdeps",
+    "diagnostics": "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/genestackctl.build/Subprocess.dia"
+  }
+}

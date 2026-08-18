@@ -1,0 +1,66 @@
+{
+  "$schema" : "https://opencode.ai/config.json",
+  "plugin": [
+    "superpowers@git+https://github.com/obra/superpowers.git"
+  ],
+  "compaction" : {
+    "auto" : true,
+    "prune" : true
+  },
+  "instructions" : [
+    "https://erebine.ai/docs/mcp/opencode-rules.md"
+  ],
+  "lsp" : true,
+  "mcp" : {
+    "erebine" : {
+      "enabled" : true,
+      "headers" : {
+        "Authorization" : "Bearer ere_kevincarter_Kguk_VzaQLrJ1b9ge1zEQYk1_bDg9lG3fuR69hoSn2g",
+        "X-Erebine-Workspace" : "ws_AaEXOxfzQVEg2H8lnvFLLiKn"
+      },
+      "oauth" : false,
+      "timeout" : 30000,
+      "type" : "remote",
+      "url" : "https://api.erebine.ai/proj_9E15DD31-56E1-41/v1/mcp"
+    }
+  },
+  "provider" : {
+    "erebine" : {
+      "models" : {
+        "institutor" : {
+          "limit" : {
+            "context" : 1000000,
+            "output" : 32000
+          },
+          "modalities" : {
+            "input" : [
+              "text",
+              "image"
+            ],
+            "output" : [
+              "text"
+            ]
+          },
+          "name" : "Sementic",
+          "options" : {
+            "reasoningEffort" : "high",
+            "reasoningSummary" : "auto",
+            "textVerbosity" : "high"
+          },
+          "reasoning" : true,
+          "temperature" : true,
+          "tool_call" : true
+        }
+      },
+      "name" : "Erebine - ws_AaEXOxfzQVEg2H8lnvFLLiKn",
+      "npm" : "@ai-sdk/openai-compatible",
+      "options" : {
+        "apiKey" : "ere_kevincarter_Kguk_VzaQLrJ1b9ge1zEQYk1_bDg9lG3fuR69hoSn2g",
+        "baseURL" : "https://api.erebine.ai/proj_9E15DD31-56E1-41/ws_AaEXOxfzQVEg2H8lnvFLLiKn/_semantic/router/v1",
+        "headers" : {
+          "X-Erebine-Augment-Corrective-Retries" : "on"
+        }
+      }
+    }
+  }
+}

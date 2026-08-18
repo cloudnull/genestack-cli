@@ -1,0 +1,12 @@
+{
+  "": {
+    "swift-dependencies": "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/ArgumentParserToolInfo.build/primary.swiftdeps"
+  },
+  "/Users/kevin.carter/projects/genestack-ctl/.build/checkouts/swift-argument-parser/Sources/ArgumentParserToolInfo/ToolInfo.swift": {
+    "dependencies": "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/ArgumentParserToolInfo.build/ToolInfo.d",
+    "object": "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/ArgumentParserToolInfo.build/ToolInfo.swift.o",
+    "swiftmodule": "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/ArgumentParserToolInfo.build/ToolInfo~partial.swiftmodule",
+    "swift-dependencies": "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/ArgumentParserToolInfo.build/ToolInfo.swiftdeps",
+    "diagnostics": "/Users/kevin.carter/projects/genestack-ctl/.build/arm64-apple-macosx/debug/ArgumentParserToolInfo.build/ToolInfo.dia"
+  }
+}
