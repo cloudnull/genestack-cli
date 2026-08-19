@@ -1,0 +1,35 @@
+name: keystone
+namespace: openstack
+version: "0.0.1"
+description: "OpenStack Identity Service"
+helm_chart:
+  repository: https://github.com/openstack/openstack-helm
+  name: keystone
+  version: "0.1.0"
+  namespace: openstack
+  values:
+    manifest_etc_apache: true
+    conf:
+      keystone:
+        DEFAULT:
+          admin_token: password
+labels:
+  - name: openstack-identity
+secrets:
+  - name: keystone-fernet-key
+    type: Opaque
+    rotate_with_service: true
+    keys:
+      - fernet-key
+  - name: keystone-admin-password
+    type: Opaque
+    rotate_with_service: true
+    keys:
+      - password
+  - name: keystone-database-password
+    type: Opaque
+    rotate_with_service: false
+    keys:
+      - password
+dependencies: []
+kustomize: keystone

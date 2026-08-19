@@ -1,0 +1,32 @@
+name: nova
+namespace: openstack
+version: "0.0.1"
+description: "OpenStack Compute Service"
+helm_chart:
+  repository: https://github.com/openstack/openstack-helm
+  name: nova
+  version: "0.1.0"
+  namespace: openstack
+labels:
+  - name: openstack
+secrets:
+  - name: nova-service-password
+    type: Opaque
+    rotate_with_service: true
+    keys:
+      - password
+  - name: nova-keystone-user-password
+    type: Opaque
+    rotate_with_service: true
+    keys:
+      - password
+  - name: nova-database-password
+    type: Opaque
+    rotate_with_service: false
+    keys:
+      - password
+dependencies:
+  - name: keystone
+    secrets:
+      - keystone-fernet-key
+  - glance

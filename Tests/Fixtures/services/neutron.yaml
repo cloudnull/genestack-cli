@@ -1,0 +1,24 @@
+name: neutron
+namespace: openstack
+version: "0.0.1"
+description: "OpenStack Networking Service"
+helm_chart:
+  repository: https://github.com/openstack/openstack-helm
+  name: neutron
+  version: "0.1.0"
+  namespace: openstack
+labels:
+  - name: openstack
+secrets:
+  - name: neutron-password
+    type: Opaque
+    rotate_with_service: true
+    keys:
+      - password
+  - name: neutron-keystone-user-password
+    type: Opaque
+    rotate_with_service: true
+    keys:
+      - password
+dependencies:
+  - keystone

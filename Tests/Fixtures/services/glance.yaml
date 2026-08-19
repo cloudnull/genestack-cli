@@ -1,0 +1,24 @@
+name: glance
+namespace: openstack
+version: "0.0.1"
+description: "OpenStack Image Service"
+helm_chart:
+  repository: https://github.com/openstack/openstack-helm
+  name: glance
+  version: "0.1.0"
+  namespace: openstack
+labels:
+  - name: openstack
+secrets:
+  - name: glance-password
+    type: Opaque
+    rotate_with_service: true
+    keys:
+      - password
+  - name: glance-keystone-user-password
+    type: Opaque
+    rotate_with_service: true
+    keys:
+      - password
+dependencies:
+  - keystone

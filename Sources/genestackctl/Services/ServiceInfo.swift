@@ -13,7 +13,7 @@ struct HelmChartInfo: Codable, Equatable {
     let repository: String?
     let name: String
     let version: String?
-    let values: [String: String]?
+    let values: AnyCodable?
     let namespace: String?
     let extraValues: String?
     let overrideValues: String?
