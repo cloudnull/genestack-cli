@@ -13,47 +13,8 @@ on:
       - "Tests/**"
 
 jobs:
-  build-binaries:
-    name: Build Binaries
-    runs-on: macos-latest
-    outputs:
-      version: ${{ steps.version.outputs.version }}
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      
-      - name: Set up Swift
-        uses: swift-actions/setup-swift@v3
-        with:
-          swift-version: "6.3"
-      
-      - name: Resolve version
-        id: version
-        run: |
-          TAG="$(git describe --tags --always 2>/dev/null || echo "0.0.0")"
-          VERSION="${TAG#v}"
-          echo "version=${VERSION}" >> $GITHUB_OUTPUT
-      
-      - name: Build release binary
-        run: swift build -c release
-      
-      - name: Strip binary
-        run: strip .build/release/genectl
-      
-      - name: Verify binary
-        run: .build/release/genectl --version
-      
-      - name: Upload binary artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: genectl-binary-mac
-          path: .build/release/genectl
-          retention-days: 14
-
   build-rpm:
     name: Build RPM
-    needs: build-binaries
     runs-on: ubuntu-latest
     
     steps:
@@ -67,8 +28,11 @@ jobs:
             SWIFT_VERSION="6.3-RELEASE"
             SWIFT_PLATFORM="ubuntu24.04"
             SWIFT_ARCHIVE="swift-${SWIFT_VERSION}-${SWIFT_PLATFORM}.tar.gz"
+            SWIFT_URL="https://swift.org/builds/swift-${SWIFT_VERSION}/${SWIFT_PLATFORM}/swift-${SWIFT_VERSION}/${SWIFT_PLATFORM}/$SWIFT_ARCHIVE"
             
-            wget -q "https://swift.org/builds/swift-${SWIFT_VERSION}/${SWIFT_PLATFORM}/swift-${SWIFT_VERSION}/${SWIFT_PLATFORM}/$SWIFT_ARCHIVE"
+            echo "Downloading Swift ${SWIFT_VERSION} for ${SWIFT_PLATFORM}..."
+            wget -q --no-check-certificate "$SWIFT_URL"
+            echo "Extracting..."
             tar xzf "$SWIFT_ARCHIVE"
             echo "$(pwd)/swift-${SWIFT_VERSION}/usr/bin" >> $GITHUB_PATH
           fi
@@ -76,8 +40,12 @@ jobs:
       
       - name: Install RPM tools
         run: |
-          sudo apt-get update
-          sudo apt-get install -y rpm rpm-build
+          sudo apt-get update -qq 2>&1 || sudo apt-get update -qq
+          sudo apt-get install -y -qq rpm rpm-build 2>&1 || {
+            echo "Attempting retry..."
+            sudo apt-get update -qq
+            sudo apt-get install -y -qq rpm rpm-build
+          }
       
       - name: Build binary
         run: |
@@ -117,7 +85,6 @@ jobs:
 
   build-deb:
     name: Build DEB
-    needs: build-binaries
     runs-on: ubuntu-latest
     
     steps:
@@ -131,16 +98,24 @@ jobs:
             SWIFT_VERSION="6.3-RELEASE"
             SWIFT_PLATFORM="ubuntu24.04"
             SWIFT_ARCHIVE="swift-${SWIFT_VERSION}-${SWIFT_PLATFORM}.tar.gz"
+            SWIFT_URL="https://swift.org/builds/swift-${SWIFT_VERSION}/${SWIFT_PLATFORM}/swift-${SWIFT_VERSION}/${SWIFT_PLATFORM}/$SWIFT_ARCHIVE"
             
-            wget -q "https://swift.org/builds/swift-${SWIFT_VERSION}/${SWIFT_PLATFORM}/swift-${SWIFT_VERSION}/${SWIFT_PLATFORM}/$SWIFT_ARCHIVE"
+            echo "Downloading Swift ${SWIFT_VERSION} for ${SWIFT_PLATFORM}..."
+            wget -q --no-check-certificate "$SWIFT_URL"
+            echo "Extracting..."
             tar xzf "$SWIFT_ARCHIVE"
             echo "$(pwd)/swift-${SWIFT_VERSION}/usr/bin" >> $GITHUB_PATH
           fi
+          swift --version
       
       - name: Install packaging tools
         run: |
-          sudo apt-get update
-          sudo apt-get install -y dpkg-dev
+          sudo apt-get update -qq 2>&1 || sudo apt-get update -qq
+          sudo apt-get install -y -qq dpkg-dev 2>&1 || {
+            echo "Attempting retry..."
+            sudo apt-get update -qq
+            sudo apt-get install -y -qq dpkg-dev
+          }
       
       - name: Build binary
         run: |
@@ -194,6 +169,36 @@ jobs:
         with:
           name: genectl-deb
           path: packaging/deb/build/*.deb
+          retention-days: 14
+
+  build-mac:
+    name: Build macOS Binary
+    runs-on: macos-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Set up Swift
+        uses: swift-actions/setup-swift@v3
+        with:
+          swift-version: "6.3"
+      
+      - name: Build release binary
+        run: swift build -c release
+      
+      - name: Strip binary
+        run: strip .build/release/genectl
+      
+      - name: Verify binary
+        run: .build/release/genectl --version
+      
+      - name: Upload macOS artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: genectl-macos
+          path: .build/release/genectl
           retention-days: 14
 
   publish-packages:
