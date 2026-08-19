@@ -65,17 +65,24 @@ make clean
 ### 1. Generate a Cluster Spec
 
 ```bash
-# Interactive wizard
-genectl install --config mycluster.yaml --yes
+# Create a minimal spec
+genectl config create --yes --cluster-name mycloud --output mycluster.yaml
 
-# Or create from scratch
-genectl install --output mycluster.yaml --skip-install
+# Create with hyperconverged mode (3 nodes auto-generated)
+genectl config create --yes --hyperconverged --cluster-name mycloud --output mycluster.yaml
+
+# Create with common OpenStack services enabled
+genectl config create --yes --common-services --cluster-name mycloud --output mycluster.yaml
 ```
 
-### 2. Validate Your Configuration
+### 2. Interactive Installation Wizard (alternative)
 
 ```bash
-genectl config validate --config mycluster.yaml
+# Run the interactive wizard
+genectl install --yes --output mycluster.yaml --skip-install
+
+# Full installation with wizard
+genectl install --yes --output mycluster.yaml
 ```
 
 ### 3. Apply the Configuration
