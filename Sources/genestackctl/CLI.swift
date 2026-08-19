@@ -17,6 +17,7 @@ struct GenestackCLI: ParsableCommand {
         subcommands: [
             InstallCommand.self,
             ApplyCommand.self,
+            UpgradeCommand.self,
             ServiceCommands.self,
             NodeCommands.self,
             SecretCommands.self,
