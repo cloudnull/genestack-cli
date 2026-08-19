@@ -1,0 +1,19 @@
+Package: genectl
+Version: @VERSION@
+Architecture: @ARCH@
+Maintainer: Racker Labs <feedback@rackersystems.com>
+Depends: ca-certificates
+Section: utils
+Priority: optional
+Homepage: https://github.com/rackerlabs/genestack
+Description: Genestack Cluster Installation CLI
+ Genestack Cluster Installation CLI (genectl) is a cross-platform command-line
+ tool for installing and managing Genestack OpenStack Kubernetes Stack clusters.
+ .
+ Features:
+ - Interactive installation wizard for cluster configuration
+ - Declarative YAML-based cluster specs
+ - Service, node, and secret management
+ - Dependency-ordered installation pipeline
+ - Pre-flight checks and cluster status monitoring
+ - Upgrade orchestration

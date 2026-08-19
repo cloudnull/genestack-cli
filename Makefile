@@ -1,4 +1,4 @@
-.PH: help debug release test clean lint ci-test ci-release install-bin
+.PH: help debug release test clean lint ci-test ci-release install-bin package-rpm package-deb package-all
 
 .DEFAULT_GOAL := help
 
@@ -20,6 +20,9 @@ help:
 	@echo "  make install-bin - Install binary to /usr/local/bin"
 	@echo "  make ci-test   - Run CI test suite (verbose)"
 	@echo "  make ci-release - Create release artifacts"
+	@echo "  make package-rpm - Build RPM package (Linux)"
+	@echo "  make package-deb - Build DEB package (Linux)"
+	@echo "  make package-all - Build both RPM and DEB packages"
 	@echo ""
 	@echo "Help:"
 	@echo "  make help     - Show this help message"
@@ -44,3 +47,14 @@ debug:
 install-bin: release
 	sudo cp .build/release/genectl /usr/local/bin/
 	@echo "Installed genectl to /usr/local/bin/"
+
+package-rpm: release
+	@echo "Building RPM package..."
+	./packaging/rpm/build.sh
+
+package-deb: release
+	@echo "Building DEB package..."
+	./packaging/deb/build.sh
+
+package-all: package-rpm package-deb
+	@echo "All packages built successfully"
