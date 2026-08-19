@@ -45,7 +45,7 @@ jobs:
       - name: Set up Swift
         uses: swift-actions/setup-swift@v3
         with:
-          swift-version: 6.3
+          swift-version: "6.3.2"
       
       - name: Build Linux Binary
         run: |
@@ -63,33 +63,49 @@ jobs:
           tar -czf genectl-linux-amd64.tar.gz genectl-linux-amd64/
           ls -la genectl-linux-amd64.tar.gz
       
-      - name: Build macOS Binary
-        uses: gacts/toolchain@v2
-        with:
-          arch: x64
-          os: macos
-          swift-version: 6.3
-          bundle-path: genectl-macos-x86_64
-        run: |
-          swift package resolve
-          swift build -c release
-          cd .build/release
-          mkdir -p genectl-macos-x86_64
-          cp genectl genectl-macos-x86_64/
-          tar -czf genectl-macos-x86_64.tar.gz genectl-macos-x86_64/
-        shell: bash
-      
       - name: Upload Linux Artifact
         uses: actions/upload-artifact@v4
         with:
           name: genectl-linux
           path: .build/release/genectl-linux-amd64.tar.gz
           retention-days: 14
+
+  build-macos-x86_64:
+    name: Build macOS Binary (x86_64)
+    runs-on: macos-13-xl
+    needs: prepare-release
+    if: startsWith(github.ref, 'refs/tags/v')
+    
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       
-      - name: Upload macOS Artifact
+      - name: Set up Swift
+        uses: swift-actions/setup-swift@v3
+        with:
+          swift-version: "6.3.2"
+      
+      - name: Build Release
+        run: |
+          swift package resolve
+          swift build -c release
+      
+      - name: Strip binary
+        run: strip .build/release/genectl
+      
+      - name: Create macOS x86_64 tarball
+        run: |
+          cd .build/release
+          mkdir -p genectl-macos-x86_64
+          cp genectl genectl-macos-x86_64/
+          tar -czf genectl-macos-x86_64.tar.gz genectl-macos-x86_64/
+          ls -la genectl-macos-x86_64.tar.gz
+      
+      - name: Upload macOS x86_64 Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: genectl-macos
+          name: genectl-macos-x86_64
           path: .build/release/genectl-macos-x86_64.tar.gz
           retention-days: 14
 
@@ -101,11 +117,13 @@ jobs:
     
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       
       - name: Set up Swift
         uses: swift-actions/setup-swift@v3
         with:
-          swift-version: 6.3
+          swift-version: "6.3.2"
       
       - name: Build Release
         run: |
@@ -130,11 +148,150 @@ jobs:
           path: .build/release/genectl-darwin-arm64.tar.gz
           retention-days: 14
 
+  build-rpm:
+    name: Build RPM
+    needs: prepare-release
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
+    
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Install Swift and RPM tools
+        uses: swift-actions/setup-swift@v3
+        with:
+          swift-version: "6.3.2"
+      
+      - name: Install RPM build tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y rpm rpm-build
+      
+      - name: Download binary artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: genectl-linux
+          path: .build/release/
+      
+      - name: Extract version
+        id: version
+        run: |
+          TAG="${GITHUB_REF#refs/tags/}"
+          VERSION="${TAG#v}"
+          echo "version=${VERSION}" >> $GITHUB_OUTPUT
+      
+      - name: Build RPM
+        run: |
+          mkdir -p packaging/rpm/build/SOURCES
+          # Extract the tarball
+          cd .build/release
+          tar -xzf genectl-linux-amd64.tar.gz
+          cp genectl-linux-amd64/genectl packaging/rpm/build/SOURCES/
+          chmod 0755 packaging/rpm/build/SOURCES/genectl
+          cp packaging/LICENSE packaging/rpm/build/SOURCES/
+          
+          rpmbuild -bb packaging/rpm/SPECS/genectl.spec \
+            --define "pkgver ${{ steps.version.outputs.version }}" \
+            --define "_topdir packaging/rpm/build" \
+            --define "_sourcedir packaging/rpm/build/SOURCES" \
+            --define "dist .el9"
+      
+      - name: Show RPM packages
+        run: find packaging/rpm/build/RPMS -name '*.rpm' -exec ls -lh {} \;
+      
+      - name: Upload RPM artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: genectl-rpm
+          path: packaging/rpm/build/RPMS/**/*.rpm
+          retention-days: 14
+
+  build-deb:
+    name: Build DEB
+    needs: prepare-release
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
+    
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Install Swift and packaging tools
+        uses: swift-actions/setup-swift@v3
+        with:
+          swift-version: "6.3.2"
+      
+      - name: Install packaging tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y dpkg-dev
+      
+      - name: Download binary artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: genectl-linux
+          path: .build/release/
+      
+      - name: Determine version and architecture
+        id: version
+        run: |
+          TAG="${GITHUB_REF#refs/tags/}"
+          VERSION="${TAG#v}"
+          ARCH="$(uname -m)"
+          case "$ARCH" in
+            x86_64)  DEB_ARCH=amd64 ;;
+            aarch64) DEB_ARCH=arm64 ;;
+            *) DEB_ARCH=amd64 ;;
+          esac
+          echo "version=${VERSION}" >> $GITHUB_OUTPUT
+          echo "arch=${DEB_ARCH}" >> $GITHUB_OUTPUT
+      
+      - name: Build DEB
+        run: |
+          WORK="packaging/deb/build"
+          mkdir -p "$WORK"
+          
+          PKG="genectl"
+          VERSION="${{ steps.version.outputs.version }}"
+          DEB_ARCH="${{ steps.version.outputs.arch }}"
+          
+          # Extract the tarball
+          cd .build/release
+          tar -xzf genectl-linux-amd64.tar.gz
+          
+          stage="$WORK/${PKG}_${VERSION}_${DEB_ARCH}"
+          rm -rf "$stage"
+          mkdir -p "$stage/DEBIAN" "$stage/usr/bin"
+          
+          cp genectl-linux-amd64/genectl "$stage/usr/bin/genectl"
+          chmod 0755 "$stage/usr/bin/genectl"
+          
+          sed -e "s/@VERSION@/${VERSION}/" -e "s/@ARCH@/${DEB_ARCH}/" \
+              packaging/deb/packages/genectl/control > "$stage/DEBIAN/control"
+          
+          install -D -m 0644 packaging/LICENSE "$stage/usr/share/doc/$PKG/copyright"
+          
+          dpkg-deb --build --root-owner-group "$stage" "$WORK/${PKG}_${VERSION}_${DEB_ARCH}.deb"
+          rm -rf "$stage"
+      
+      - name: Show DEB packages
+        run: ls -lh packaging/deb/build/*.deb
+      
+      - name: Upload DEB artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: genectl-deb
+          path: packaging/deb/build/*.deb
+          retention-days: 14
+
   publish-release:
     name: Publish Release Assets
-    needs: [prepare-release, build-native-macos]
+    needs: [build-native-macos, build-rpm, build-deb]
     runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/tags/v')
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
     
     steps:
       - name: Download all artifacts
@@ -144,13 +301,20 @@ jobs:
       
       - name: List artifacts
         run: |
-          find ./artifacts -name "*.tar.gz" -exec ls -la {} \;
+          echo "=== RPM packages ==="
+          find ./artifacts/genectl-rpm -name "*.rpm" | xargs ls -lh 2>/dev/null || echo "No RPM packages found"
+          echo "=== DEB packages ==="
+          find ./artifacts/genectl-deb -name "*.deb" | xargs ls -lh 2>/dev/null || echo "No DEB packages found"
+          echo "=== macOS binaries ==="
+          find ./artifacts -name "*.tar.gz" | ls -lh
       
       - name: Publish to GitHub Release
         uses: softprops/action-gh-release@v1
         with:
           files: |
+            ./artifacts/genectl-rpm/**/*.rpm
+            ./artifacts/genectl-deb/*.deb
             ./artifacts/genectl-linux/genectl-linux-amd64.tar.gz
-            ./artifacts/genectl-macos/genectl-macos-x86_64.tar.gz
+            ./artifacts/genectl-macos-x86_64/genectl-macos-x86_64.tar.gz
             ./artifacts/genectl-darwin-arm64/genectl-darwin-arm64.tar.gz
           fail_on_unmatched_files: false
