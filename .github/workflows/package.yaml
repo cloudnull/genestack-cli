@@ -26,7 +26,7 @@ jobs:
       - name: Set up Swift
         uses: swift-actions/setup-swift@v3
         with:
-          swift-version: "6.3.2"
+          swift-version: "6.3"
       
       - name: Resolve version
         id: version
@@ -64,10 +64,18 @@ jobs:
         with:
           fetch-depth: 0
       
-      - name: Set up Swift
-        uses: swift-actions/setup-swift@v3
-        with:
-          swift-version: "6.3.2"
+      - name: Install Swift
+        run: |
+          if ! command -v swift &> /dev/null; then
+            SWIFT_VERSION="6.3-RELEASE"
+            SWIFT_PLATFORM="ubuntu24.04"
+            SWIFT_ARCHIVE="swift-${SWIFT_VERSION}-${SWIFT_PLATFORM}.tar.gz"
+            
+            wget -q "https://swift.org/builds/swift-${SWIFT_VERSION}/${SWIFT_PLATFORM}/swift-${SWIFT_VERSION}/${SWIFT_PLATFORM}/$SWIFT_ARCHIVE"
+            tar xzf "$SWIFT_ARCHIVE"
+            echo "$(pwd)/swift-${SWIFT_VERSION}/usr/bin" >> $GITHUB_PATH
+          fi
+          swift --version
       
       - name: Install RPM tools
         run: sudo apt-get update && sudo apt-get install -y rpm rpm-build
@@ -120,12 +128,21 @@ jobs:
           fetch-depth: 0
       
       - name: Install Swift
-        uses: swift-actions/setup-swift@v3
-        with:
-          swift-version: "6.3.2"
+        run: |
+          if ! command -v swift &> /dev/null; then
+            SWIFT_VERSION="6.3-RELEASE"
+            SWIFT_PLATFORM="ubuntu24.04"
+            SWIFT_ARCHIVE="swift-${SWIFT_VERSION}-${SWIFT_PLATFORM}.tar.gz"
+            
+            wget -q "https://swift.org/builds/swift-${SWIFT_VERSION}/${SWIFT_PLATFORM}/swift-${SWIFT_VERSION}/${SWIFT_PLATFORM}/$SWIFT_ARCHIVE"
+            tar xzf "$SWIFT_ARCHIVE"
+            echo "$(pwd)/swift-${SWIFT_VERSION}/usr/bin" >> $GITHUB_PATH
+          fi
       
       - name: Install packaging tools
-        run: sudo apt-get update && sudo apt-get install -y dpkg-dev
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y dpkg-dev
       
       - name: Download binary
         uses: actions/download-artifact@v4
@@ -164,7 +181,7 @@ jobs:
           chmod 0755 "$stage/usr/bin/genectl"
           
           sed -e "s/@VERSION@/${VERSION}/" -e "s/@ARCH@/${DEB_ARCH}/" \
-              packaging/deb/packages/genectl/control > "$stage/DEBIAN/control"
+            packaging/deb/packages/genectl/control > "$stage/DEBIAN/control"
           
           install -D -m 0644 packaging/LICENSE "$stage/usr/share/doc/$PKG/copyright"
           
@@ -196,9 +213,9 @@ jobs:
       - name: List artifacts
         run: |
           echo "=== RPM packages ==="
-          find ./artifacts/genectl-rpm -name "*.rpm" | xargs ls -lh
+          find ./artifacts/genectl-rpm -name "*.rpm" | xargs ls -lh 2>/dev/null || echo "No RPM packages found"
           echo "=== DEB packages ==="
-          find ./artifacts/genectl-deb -name "*.deb" | xargs ls -lh
+          find ./artifacts/genectl-deb -name "*.deb" | xargs ls -lh 2>/dev/null || echo "No DEB packages found"
       
       - name: Publish to GitHub Release
         uses: softprops/action-gh-release@v1

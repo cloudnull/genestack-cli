@@ -42,10 +42,18 @@ jobs:
         env:
           VERSION: ${{ steps.extract_version.outputs.version }}
       
-      - name: Set up Swift
-        uses: swift-actions/setup-swift@v3
-        with:
-          swift-version: "6.3.2"
+      - name: Install Swift
+        run: |
+          if ! command -v swift &> /dev/null; then
+            SWIFT_VERSION="6.3-RELEASE"
+            SWIFT_PLATFORM="ubuntu24.04"
+            SWIFT_ARCHIVE="swift-${SWIFT_VERSION}-${SWIFT_PLATFORM}.tar.gz"
+            
+            wget -q "https://swift.org/builds/swift-${SWIFT_VERSION}/${SWIFT_PLATFORM}/swift-${SWIFT_VERSION}/${SWIFT_PLATFORM}/$SWIFT_ARCHIVE"
+            tar xzf "$SWIFT_ARCHIVE"
+            echo "$(pwd)/swift-${SWIFT_VERSION}/usr/bin" >> $GITHUB_PATH
+          fi
+          swift --version
       
       - name: Build Linux Binary
         run: |
@@ -84,7 +92,7 @@ jobs:
       - name: Set up Swift
         uses: swift-actions/setup-swift@v3
         with:
-          swift-version: "6.3.2"
+          swift-version: "6.3"
       
       - name: Build Release
         run: |
@@ -123,7 +131,7 @@ jobs:
       - name: Set up Swift
         uses: swift-actions/setup-swift@v3
         with:
-          swift-version: "6.3.2"
+          swift-version: "6.3"
       
       - name: Build Release
         run: |
@@ -159,10 +167,18 @@ jobs:
         with:
           fetch-depth: 0
       
-      - name: Install Swift and RPM tools
-        uses: swift-actions/setup-swift@v3
-        with:
-          swift-version: "6.3.2"
+      - name: Install Swift
+        run: |
+          if ! command -v swift &> /dev/null; then
+            SWIFT_VERSION="6.3-RELEASE"
+            SWIFT_PLATFORM="ubuntu24.04"
+            SWIFT_ARCHIVE="swift-${SWIFT_VERSION}-${SWIFT_PLATFORM}.tar.gz"
+            
+            wget -q "https://swift.org/builds/swift-${SWIFT_VERSION}/${SWIFT_PLATFORM}/swift-${SWIFT_VERSION}/${SWIFT_PLATFORM}/$SWIFT_ARCHIVE"
+            tar xzf "$SWIFT_ARCHIVE"
+            echo "$(pwd)/swift-${SWIFT_VERSION}/usr/bin" >> $GITHUB_PATH
+          fi
+          swift --version
       
       - name: Install RPM build tools
         run: |
@@ -188,11 +204,11 @@ jobs:
           # Extract the tarball
           cd .build/release
           tar -xzf genectl-linux-amd64.tar.gz
-          cp genectl-linux-amd64/genectl packaging/rpm/build/SOURCES/
-          chmod 0755 packaging/rpm/build/SOURCES/genectl
-          cp packaging/LICENSE packaging/rpm/build/SOURCES/
+          cp genectl-linux-amd64/genectl ../packaging/rpm/build/SOURCES/
+          chmod 0755 ../packaging/rpm/build/SOURCES/genectl
+          cp ../../packaging/LICENSE ../packaging/rpm/build/SOURCES/
           
-          rpmbuild -bb packaging/rpm/SPECS/genectl.spec \
+          rpmbuild -bb ../../packaging/rpm/SPECS/genectl.spec \
             --define "pkgver ${{ steps.version.outputs.version }}" \
             --define "_topdir packaging/rpm/build" \
             --define "_sourcedir packaging/rpm/build/SOURCES" \
@@ -219,10 +235,17 @@ jobs:
         with:
           fetch-depth: 0
       
-      - name: Install Swift and packaging tools
-        uses: swift-actions/setup-swift@v3
-        with:
-          swift-version: "6.3.2"
+      - name: Install Swift
+        run: |
+          if ! command -v swift &> /dev/null; then
+            SWIFT_VERSION="6.3-RELEASE"
+            SWIFT_PLATFORM="ubuntu24.04"
+            SWIFT_ARCHIVE="swift-${SWIFT_VERSION}-${SWIFT_PLATFORM}.tar.gz"
+            
+            wget -q "https://swift.org/builds/swift-${SWIFT_VERSION}/${SWIFT_PLATFORM}/swift-${SWIFT_VERSION}/${SWIFT_PLATFORM}/$SWIFT_ARCHIVE"
+            tar xzf "$SWIFT_ARCHIVE"
+            echo "$(pwd)/swift-${SWIFT_VERSION}/usr/bin" >> $GITHUB_PATH
+          fi
       
       - name: Install packaging tools
         run: |
@@ -270,9 +293,9 @@ jobs:
           chmod 0755 "$stage/usr/bin/genectl"
           
           sed -e "s/@VERSION@/${VERSION}/" -e "s/@ARCH@/${DEB_ARCH}/" \
-              packaging/deb/packages/genectl/control > "$stage/DEBIAN/control"
+              ../../packaging/deb/packages/genectl/control > "$stage/DEBIAN/control"
           
-          install -D -m 0644 packaging/LICENSE "$stage/usr/share/doc/$PKG/copyright"
+          install -D -m 0644 ../../packaging/LICENSE "$stage/usr/share/doc/$PKG/copyright"
           
           dpkg-deb --build --root-owner-group "$stage" "$WORK/${PKG}_${VERSION}_${DEB_ARCH}.deb"
           rm -rf "$stage"
@@ -306,7 +329,7 @@ jobs:
           echo "=== DEB packages ==="
           find ./artifacts/genectl-deb -name "*.deb" | xargs ls -lh 2>/dev/null || echo "No DEB packages found"
           echo "=== macOS binaries ==="
-          find ./artifacts -name "*.tar.gz" | ls -lh
+          find ./artifacts -name "*.tar.gz" | xargs ls -lh 2>/dev/null || echo "No binary archives found"
       
       - name: Publish to GitHub Release
         uses: softprops/action-gh-release@v1
