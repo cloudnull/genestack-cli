@@ -106,7 +106,54 @@ genectl apply --config mycluster.yaml --dry-run
 |---------|-------------|
 | `genectl install` | Full cluster installation wizard |
 | `genectl apply` | Execute installation from existing spec |
+| `genectl upgrade` | Safely upgrade cluster components |
 | `genectl config` | Validate, edit, and manage cluster config |
+
+### Operational Commands
+
+| Command | Description |
+|---------|-------------|
+| `genectl preflight` | Perform pre-flight checks for deployment |
+| `genectl status` | Check cluster deployment and health status |
+
+#### Pre-flight Checks
+
+```bash
+# Run basic pre-flight checks
+genectl preflight
+
+# With verbose output
+genectl preflight --verbose
+
+# With cluster spec validation
+genectl preflight --config mycluster.yaml
+```
+
+#### Cluster Status
+
+```bash
+# Check cluster status
+genectl status
+
+# Verbose output with service details
+genectl status --verbose
+
+# Check specific cluster
+genectl status --config mycluster.yaml
+```
+
+#### Upgrading Clusters
+
+```bash
+# Upgrade all enabled services
+genectl upgrade --config mycluster.yaml --yes
+
+# Upgrade specific service
+genectl upgrade --config mycluster.yaml --service nova
+
+# Dry run to see upgrade plan
+genectl upgrade --config mycluster.yaml --dry-run
+```
 
 ### Service Management
 
