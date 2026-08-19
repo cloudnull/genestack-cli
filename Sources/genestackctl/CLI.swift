@@ -20,7 +20,9 @@ struct GenestackCLI: ParsableCommand {
             ServiceCommands.self,
             NodeCommands.self,
             SecretCommands.self,
-            ConfigCommands.self
+            ConfigCommands.self,
+            PreflightCommand.self,
+            StatusCommand.self
         ]
     )
 }
