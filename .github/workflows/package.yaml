@@ -25,13 +25,13 @@ jobs:
       - name: Install Swift
         run: |
           if ! command -v swift &> /dev/null; then
-            SWIFT_VERSION="6.3-RELEASE"
+            SWIFT_VERSION="6.3.2-RELEASE"
             SWIFT_PLATFORM="ubuntu24.04"
             SWIFT_ARCHIVE="swift-${SWIFT_VERSION}-${SWIFT_PLATFORM}.tar.gz"
-            SWIFT_URL="https://swift.org/builds/swift-${SWIFT_VERSION}/${SWIFT_PLATFORM}/swift-${SWIFT_VERSION}/${SWIFT_PLATFORM}/$SWIFT_ARCHIVE"
+            SWIFT_URL="https://swift.org/builds/swift-${SWIFT_VERSION}/${SWIFT_PLATFORM}/swift-${SWIFT_VERSION}/${SWIFT_PLATFORM}/${SWIFT_ARCHIVE}"
             
             echo "Downloading Swift ${SWIFT_VERSION} for ${SWIFT_PLATFORM}..."
-            wget -q --no-check-certificate "$SWIFT_URL"
+            wget -q --no-check-certificate -L "$SWIFT_URL"
             echo "Extracting..."
             tar xzf "$SWIFT_ARCHIVE"
             echo "$(pwd)/swift-${SWIFT_VERSION}/usr/bin" >> $GITHUB_PATH
@@ -40,9 +40,9 @@ jobs:
       
       - name: Install RPM tools
         run: |
-          sudo apt-get update -qq 2>&1 || sudo apt-get update -qq
-          sudo apt-get install -y -qq rpm rpm-build 2>&1 || {
-            echo "Attempting retry..."
+          sudo apt-get update -qq || sudo apt-get update -qq
+          sudo apt-get install -y -qq rpm rpm-build || {
+            echo "Retrying RPM tool installation..."
             sudo apt-get update -qq
             sudo apt-get install -y -qq rpm rpm-build
           }
@@ -95,13 +95,13 @@ jobs:
       - name: Install Swift
         run: |
           if ! command -v swift &> /dev/null; then
-            SWIFT_VERSION="6.3-RELEASE"
+            SWIFT_VERSION="6.3.2-RELEASE"
             SWIFT_PLATFORM="ubuntu24.04"
             SWIFT_ARCHIVE="swift-${SWIFT_VERSION}-${SWIFT_PLATFORM}.tar.gz"
-            SWIFT_URL="https://swift.org/builds/swift-${SWIFT_VERSION}/${SWIFT_PLATFORM}/swift-${SWIFT_VERSION}/${SWIFT_PLATFORM}/$SWIFT_ARCHIVE"
+            SWIFT_URL="https://swift.org/builds/swift-${SWIFT_VERSION}/${SWIFT_PLATFORM}/swift-${SWIFT_VERSION}/${SWIFT_PLATFORM}/${SWIFT_ARCHIVE}"
             
             echo "Downloading Swift ${SWIFT_VERSION} for ${SWIFT_PLATFORM}..."
-            wget -q --no-check-certificate "$SWIFT_URL"
+            wget -q --no-check-certificate -L "$SWIFT_URL"
             echo "Extracting..."
             tar xzf "$SWIFT_ARCHIVE"
             echo "$(pwd)/swift-${SWIFT_VERSION}/usr/bin" >> $GITHUB_PATH
@@ -110,9 +110,9 @@ jobs:
       
       - name: Install packaging tools
         run: |
-          sudo apt-get update -qq 2>&1 || sudo apt-get update -qq
-          sudo apt-get install -y -qq dpkg-dev 2>&1 || {
-            echo "Attempting retry..."
+          sudo apt-get update -qq || sudo apt-get update -qq
+          sudo apt-get install -y -qq dpkg-dev || {
+            echo "Retrying packaging tool installation..."
             sudo apt-get update -qq
             sudo apt-get install -y -qq dpkg-dev
           }
