@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Yams
 
 /// How pipeline errors should be handled
 enum FailureMode {
@@ -62,6 +63,7 @@ class PipelineExecutor {
     ///   - onFailure: How to handle failures
     ///   - overridesDir: Directory containing overrides
     /// - Returns: ExecutionResult with status
+    /// - Throws: GenestackError on critical failures
     func execute(
         spec: ClusterSpec,
         dryRun: Bool = false,
@@ -73,22 +75,30 @@ class PipelineExecutor {
         var failedServices: [String] = []
         var output: String = ""
         
+
+
+        
         // Step 1: Generate ansible inventory
+        output += "Step 1: Generating Ansible inventory...\n"
         let inventoryGen = InventoryGenerator()
         let inventory = try inventoryGen.generate(spec: spec)
+        
         if !dryRun {
             let inventoryPath = "\(overridesDir)/inventory/inventory.yaml"
             try ensureDirectoryExists(for: inventoryPath)
             try inventory.write(toFile: inventoryPath, atomically: true, encoding: .utf8)
             output += "Generated Ansible inventory at: \(inventoryPath)\n"
+    
         } else {
             output += "[Dry run] Would generate Ansible inventory\n"
         }
         
         // Step 2: Generate openstack-components.yaml
+        output += "Step 2: Generating openstack-components.yaml...\n"
         let componentsGen = ComponentsGenerator()
         let components: String
         let effectiveCatalog: ServiceCatalog?
+        
         if let catalog = self.catalog {
             effectiveCatalog = catalog
         } else {
@@ -106,21 +116,35 @@ class PipelineExecutor {
             try ensureDirectoryExists(for: componentsPath)
             try components.write(toFile: componentsPath, atomically: true, encoding: .utf8)
             output += "Generated openstack-components.yaml at: \(componentsPath)\n"
+    
         } else {
             output += "[Dry run] Would generate openstack-components.yaml\n"
         }
         
         // Step 3: Run bootstrap.sh (idempotent)
         if !dryRun {
-            output += "Running bootstrap.sh...\n"
-            _ = try serviceInstaller.runScript(script: "\(genestackDir)/bin/bootstrap.sh")
-            output += "bootstrap.sh completed\n"
+            output += "Step 3: Running bootstrap.sh...\n"
+    
+            do {
+                let result = try serviceInstaller.runScript(script: "\(genestackDir)/bin/bootstrap.sh", args: [])
+                if !result.success {
+                    throw GenestackError.scriptFailed("bootstrap.sh", result.exitCode)
+                }
+                output += "bootstrap.sh completed successfully\n"
+        
+            } catch let error as GenestackError {
+                throw error
+            } catch {
+                throw GenestackError.scriptFailed("bootstrap.sh", -1)
+            }
         } else {
             output += "[Dry run] Would run bootstrap.sh\n"
         }
         
         // Step 4: Execute infrastructure services
-        output += "Setting up infrastructure...\n"
+        output += "Step 4: Setting up infrastructure services...\n"
+
+        
         for step in Self.infrastructureSteps {
             if dryRun {
                 output += "[Dry run] Would install: \(step)\n"
@@ -131,23 +155,26 @@ class PipelineExecutor {
             if upgrade {
                 shouldInstall = true
             } else {
-                shouldInstall = !serviceInstaller.isInstalled(service: step)
+                do {
+                    shouldInstall = !(try serviceInstaller.isInstalled(service: step))
+                } catch {
+                    shouldInstall = true // If we can't check, try to install
+                }
             }
             
             if shouldInstall {
-                output += "Installing infrastructure service: \(step)\n"
+        
                 do {
                     let success = try serviceInstaller.install(service: step, genestackDir: genestackDir, args: [])
                     if success {
                         executedServices.append(step)
+                
                     } else {
-                        failedServices.append(step)
-                        if !FailureHandler.handle(service: step, error: NSError(domain: "InfraInstall", code: 1), mode: onFailure) {
-                            break
-                        }
+                        throw GenestackError.scriptFailed("install.sh", 1)
                     }
                 } catch {
                     failedServices.append(step)
+            
                     if !FailureHandler.handle(service: step, error: error, mode: onFailure) {
                         break
                     }
@@ -157,14 +184,25 @@ class PipelineExecutor {
         
         // Step 5: Resolve service order and execute OpenStack services
         if let catalog = effectiveCatalog {
+            output += "Step 5: Installing OpenStack services in dependency order...\n"
+    
+            
             let resolver = ServiceDependencyResolver(catalog: catalog)
             let enabledServices = spec.services?.filter { $0.enabled }.map { $0.name } ?? []
-            var orderedServices = try resolver.resolveOrder(for: enabledServices)
+            var orderedServices: [String]
+            
+            do {
+                orderedServices = try resolver.resolveOrder(for: enabledServices)
+            } catch {
+                throw GenestackError.dependencyResolutionFailed(error.localizedDescription)
+            }
+            
             let nonKeystoneServices = orderedServices.filter { $0 != "keystone" }
             
             // Handle keystone first
             if let keystoneIndex = orderedServices.firstIndex(of: "keystone") {
                 let keystoneService = orderedServices.remove(at: keystoneIndex)
+                output += "Installing keystone (dependency for all OpenStack services)...\n"
                 try installService(
                     service: keystoneService,
                     upgrade: upgrade,
@@ -176,26 +214,30 @@ class PipelineExecutor {
                 )
             }
             
-            // Install remaining services in parallel groups
-            let parallelGroups = resolver.getParallelGroups(from: nonKeystoneServices)
-            for group in parallelGroups {
-                output += "Installing services in parallel: \(group.joined(separator: ", "))\n"
-                
-                for service in group {
-                    try installService(
-                        service: service,
-                        upgrade: upgrade,
-                        dryRun: dryRun,
-                        onFailure: onFailure,
-                        executed: &executedServices,
-                        failed: &failedServices,
-                        output: &output
-                    )
-                }
+            // Install services in dependency order (can be parallelized later)
+            for service in nonKeystoneServices {
+                output += "Installing: \(service)...\n"
+                try installService(
+                    service: service,
+                    upgrade: upgrade,
+                    dryRun: dryRun,
+                    onFailure: onFailure,
+                    executed: &executedServices,
+                    failed: &failedServices,
+                    output: &output
+                )
+            }
+            
+            // Generate OpenStack RC file for user
+            if !dryRun && !executedServices.isEmpty {
+                output += "\nInstallation complete. Generating OpenStack RC file...\n"
+                output += "Run 'openstack rc' to generate your OpenStack RC file.\n"
             }
         }
         
         let success = failedServices.isEmpty
+
+        
         return ExecutionResult(
             success: success,
             executedServices: executedServices,
@@ -223,18 +265,21 @@ class PipelineExecutor {
         if upgrade {
             shouldInstall = true
         } else {
-            shouldInstall = !serviceInstaller.isInstalled(service: service)
+            do {
+                shouldInstall = !(try serviceInstaller.isInstalled(service: service))
+            } catch {
+                shouldInstall = true
+            }
         }
         
         if shouldInstall {
-            output += "Installing service: \(service)\n"
             do {
                 let success = try serviceInstaller.install(service: service, genestackDir: genestackDir, args: [])
                 if success {
                     executed.append(service)
                 } else {
                     failed.append(service)
-                    if !FailureHandler.handle(service: service, error: NSError(domain: "ServiceInstall", code: 1), mode: onFailure) {
+                    if !FailureHandler.handle(service: service, error: GenestackError.scriptFailed("install.sh", 1), mode: onFailure) {
                         // Stop execution
                     }
                 }

@@ -69,16 +69,14 @@ class OverridesManager {
             to
         ]
         
-        let success = try processRunner.run(
+        let result = try processRunner.run(
             executable: "/usr/bin/git",
             arguments: gitArgs,
             environment: ProcessInfo.processInfo.environment
         )
         
-        if !success {
-            throw NSError(domain: "OverridesManager", code: 1, userInfo: [
-                NSLocalizedDescriptionKey: "Failed to clone overrides repository: \(repo)"
-            ])
+        if !result.success {
+            throw GenestackError.gitOperationFailed("Failed to clone overrides repository: \(repo)")
         }
     }
     
