@@ -14,7 +14,11 @@ struct ConfigCommands: ParsableCommand {
     static let configuration = CommandConfiguration(
         commandName: "config",
         abstract: "Manage cluster configuration",
-        subcommands: [ConfigValidateCommand.self, ConfigEditCommand.self]
+        subcommands: [
+            ConfigCreateCommand.self,
+            ConfigValidateCommand.self, 
+            ConfigEditCommand.self
+        ]
     )
 }
 
