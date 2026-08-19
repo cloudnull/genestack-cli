@@ -27,8 +27,8 @@ final class ClusterSpecTests: XCTestCase {
         XCTAssertEqual(spec.version, "1.0")
         XCTAssertEqual(spec.metadata.clusterName, "testcloud")
         XCTAssertEqual(spec.metadata.gatewayDomain, "test.local")
-        XCTAssertTrue(spec.nodes.isEmpty)
-        XCTAssertTrue(spec.services.isEmpty)
+        XCTAssertTrue(spec.nodes?.isEmpty ?? true)
+        XCTAssertTrue(spec.services?.isEmpty ?? true)
     }
     
     func testParseFullSpec() throws {
@@ -95,11 +95,11 @@ final class ClusterSpecTests: XCTestCase {
         XCTAssertEqual(spec.kubernetes?.kubeVersion, "v1.35.6")
         
         // Verify nodes
-        XCTAssertEqual(spec.nodes.count, 1)
-        XCTAssertEqual(spec.nodes[0].name, "controller01.mycloud.local")
-        XCTAssertEqual(spec.nodes[0].ip, "10.0.0.10")
-        XCTAssertEqual(spec.nodes[0].roles.count, 4)
-        XCTAssertTrue(spec.nodes[0].roles.contains("control-plane"))
+        XCTAssertEqual(spec.nodes?.count, 1)
+        XCTAssertEqual(spec.nodes?[0].name, "controller01.mycloud.local")
+        XCTAssertEqual(spec.nodes?[0].ip, "10.0.0.10")
+        XCTAssertEqual(spec.nodes?[0].roles.count, 4)
+        XCTAssertTrue(spec.nodes?[0].roles.contains("control-plane") ?? false)
         
         // Verify network
         XCTAssertNotNil(spec.network)
@@ -111,9 +111,9 @@ final class ClusterSpecTests: XCTestCase {
         XCTAssertEqual(spec.storage?.cinderBackend, "lvm")
         
         // Verify services
-        XCTAssertEqual(spec.services.count, 1)
-        XCTAssertEqual(spec.services[0].name, "keystone")
-        XCTAssertTrue(spec.services[0].enabled)
+        XCTAssertEqual(spec.services?.count, 1)
+        XCTAssertEqual(spec.services?[0].name, "keystone")
+        XCTAssertTrue(spec.services?[0].enabled ?? false)
     }
     
     func testLoadAndSaveRoundtrip() throws {
@@ -148,7 +148,7 @@ final class ClusterSpecTests: XCTestCase {
         
         XCTAssertEqual(spec.version, reloadedSpec.version)
         XCTAssertEqual(spec.metadata.clusterName, reloadedSpec.metadata.clusterName)
-        XCTAssertEqual(spec.nodes.count, reloadedSpec.nodes.count)
-        XCTAssertEqual(spec.services.count, reloadedSpec.services.count)
+        XCTAssertEqual(spec.nodes?.count ?? 0, reloadedSpec.nodes?.count ?? 0)
+        XCTAssertEqual(spec.services?.count ?? 0, reloadedSpec.services?.count ?? 0)
     }
 }

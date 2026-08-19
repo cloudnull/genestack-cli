@@ -90,7 +90,7 @@ class ServiceDependencyResolver {
     /// - Returns: Ordered list of service names
     /// - Throws: DependencyResolutionError
     func resolveOrder(from spec: ClusterSpec) throws -> [String] {
-        let enabledServices = spec.services.filter { $0.enabled }.map { $0.name }
+            let enabledServices = spec.services?.filter { $0.enabled }.map { $0.name } ?? []
         return try resolveOrder(for: enabledServices)
     }
     

@@ -15,10 +15,10 @@ struct ClusterSpec: Codable, Equatable {
     var metadata: MetadataSpec
     var overrides: OverridesSpec?
     var kubernetes: KubernetesSpec?
-    var nodes: [NodeSpec]
+    var nodes: [NodeSpec]?
     var network: NetworkSpec?
     var storage: StorageSpec?
-    var services: [ServiceSpec]
+    var services: [ServiceSpec]?
     var environment: [String: String]?
 }
 

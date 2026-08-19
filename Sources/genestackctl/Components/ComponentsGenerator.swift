@@ -18,7 +18,7 @@ class ComponentsGenerator {
         yamlLines.append("components:")
         
         // Sort services by name for deterministic output
-        let sortedServices = spec.services.sorted { $0.name < $1.name }
+        let sortedServices = spec.services?.sorted { $0.name < $1.name } ?? []
         
         for service in sortedServices {
             let enabledStr = service.enabled ? "true" : "false"
@@ -42,7 +42,7 @@ class ComponentsGenerator {
         let allServices = catalog.getAllServices()
         
         // Create a lookup of enabled services from spec
-        let enabledServices = Set(spec.services.filter { $0.enabled }.map { $0.name })
+        let enabledServices = Set(spec.services?.filter { $0.enabled }.map { $0.name } ?? [])
         
         for service in allServices.sorted(by: { $0.name < $1.name }) {
             let enabled = enabledServices.contains(service.name)

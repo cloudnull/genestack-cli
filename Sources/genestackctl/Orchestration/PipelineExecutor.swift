@@ -158,7 +158,7 @@ class PipelineExecutor {
         // Step 5: Resolve service order and execute OpenStack services
         if let catalog = effectiveCatalog {
             let resolver = ServiceDependencyResolver(catalog: catalog)
-            let enabledServices = spec.services.filter { $0.enabled }.map { $0.name }
+            let enabledServices = spec.services?.filter { $0.enabled }.map { $0.name } ?? []
             var orderedServices = try resolver.resolveOrder(for: enabledServices)
             let nonKeystoneServices = orderedServices.filter { $0 != "keystone" }
             

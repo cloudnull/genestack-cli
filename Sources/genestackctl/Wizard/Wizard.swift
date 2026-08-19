@@ -82,7 +82,7 @@ class Wizard {
         if assumeDefaults {
             print("  (Using defaults due to --yes flag)")
         } else {
-            spec.nodes = try promptNodes(nodes: spec.nodes)
+            spec.nodes = try promptNodes(nodes: spec.nodes ?? [])
         }
         print("")
         
@@ -306,7 +306,7 @@ class Wizard {
             var servicesInSpec: [ServiceSpec] = []
             
             for service in allServices.prefix(20) {
-                let currentlyEnabled = spec.services.contains { $0.name == service.name && $0.enabled }
+                let currentlyEnabled = spec.services?.contains { $0.name == service.name && $0.enabled } ?? false
                 let promptMsg = "Enable \(service.name)? [y/N/auto]"
                 let response = prompt(promptMsg, defaultValue: currentlyEnabled ? "y" : "n")
                 
@@ -329,7 +329,7 @@ class Wizard {
                 metadata: spec.metadata,
                 overrides: spec.overrides,
                 kubernetes: spec.kubernetes,
-                nodes: spec.nodes,
+                nodes: spec.nodes ?? [],
                 network: spec.network,
                 storage: spec.storage,
                 services: servicesInSpec,
@@ -358,10 +358,10 @@ class Wizard {
                 metadata: spec.metadata,
                 overrides: spec.overrides,
                 kubernetes: k8s,
-                nodes: spec.nodes,
+                nodes: spec.nodes ?? [],
                 network: spec.network,
                 storage: spec.storage,
-                services: spec.services,
+                services: spec.services ?? [],
                 environment: spec.environment
             )
         }
@@ -385,8 +385,8 @@ class Wizard {
         summary += "  Name: \(spec.metadata.clusterName)\n"
         summary += "  Gateway: \(spec.metadata.gatewayDomain ?? "N/A")\n"
         summary += "  ACME Email: \(spec.metadata.acmeEmail ?? "N/A")\n"
-        summary += "  Nodes: \(spec.nodes.count)\n"
-        summary += "  Services: \(spec.services.filter { $0.enabled }.count) enabled / \(spec.services.count) total\n"
+        summary += "  Nodes: \(spec.nodes?.count ?? 0)\n"
+        summary += "  Services: \(spec.services?.filter { $0.enabled }.count ?? 0) enabled / \(spec.services?.count ?? 0) total\n"
         summary += "  Overrides: \(spec.overrides?.repo ?? "none")\n"
         summary += "  Hyperconverged: \(spec.kubernetes?.hyperconverged == true ? "yes" : "no")\n"
         return summary

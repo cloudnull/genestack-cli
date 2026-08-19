@@ -41,7 +41,7 @@ struct ServiceListCommand: ParsableCommand {
             if let configPath = config, FileManager.default.fileExists(atPath: configPath) {
                 let content = try String(contentsOfFile: configPath)
                 let spec = try YAMLDecoder().decode(ClusterSpec.self, from: content)
-                enabledServices = Set(spec.services.filter { $0.enabled }.map { $0.name })
+                enabledServices = Set(spec.services?.filter { $0.enabled }.map { $0.name } ?? [])
             }
             
             // Print table header
@@ -110,32 +110,74 @@ struct ServiceAddCommand: ParsableCommand {
         }
         
         // Check if already enabled
-        if spec.services.contains(where: { $0.name == name && $0.enabled }) {
+        if spec.services?.contains(where: { $0.name == name && $0.enabled }) ?? false {
             print("Error: Service '\(name)' is already enabled")
             throw ValidationError("Service already enabled")
         }
         
         // Update or add the service
-        if let index = spec.services.firstIndex(where: { $0.name == name }) {
-            // Need to make services mutable - copy the array
-            var services = spec.services
-            services[index] = ServiceSpec(name: name, enabled: true, version: services[index].version, helmArgs: services[index].helmArgs)
-            // We need to update spec which means we need a mutable version
-            // For now, this is a limitation we'll address in the wizard
-            print("Service '\(name)' found but spec modification requires full rewrite")
-            print("Use 'genectl config edit' to modify services in the spec")
-            return
-        } else {
+        if let services = spec.services, let index = services.firstIndex(where: { $0.name == name }) {
+            let newServices = services.map { svc -> ServiceSpec in
+                if svc.name == name {
+                    return ServiceSpec(name: name, enabled: true, version: svc.version, helmArgs: svc.helmArgs)
+                }
+                return svc
+            }
+            
+            let newSpec = ClusterSpec(
+                version: spec.version,
+                metadata: spec.metadata,
+                overrides: spec.overrides,
+                kubernetes: spec.kubernetes,
+                nodes: spec.nodes ?? [],
+                network: spec.network,
+                storage: spec.storage,
+                services: newServices,
+                environment: spec.environment
+            )
+            
+            let yaml = try YAMLEncoder().encode(newSpec)
+            try yaml.write(toFile: configPath, atomically: true, encoding: String.Encoding.utf8)
+            print("Service '\(name)' enabled in '\(configPath)'")
+        } else if let services = spec.services {
             // Add new service
-            var services = spec.services
-            services.append(ServiceSpec(name: name, enabled: true, version: nil, helmArgs: nil))
-            // Same issue with immutable struct
-            print("Service '\(name)' added to spec")
+            let newServices = services + [ServiceSpec(name: name, enabled: true, version: nil, helmArgs: nil)]
+            
+            let newSpec = ClusterSpec(
+                version: spec.version,
+                metadata: spec.metadata,
+                overrides: spec.overrides,
+                kubernetes: spec.kubernetes,
+                nodes: spec.nodes ?? [],
+                network: spec.network,
+                storage: spec.storage,
+                services: newServices,
+                environment: spec.environment
+            )
+            
+            let yaml = try YAMLEncoder().encode(newSpec)
+            try yaml.write(toFile: configPath, atomically: true, encoding: String.Encoding.utf8)
+            print("Service '\(name)' added to '\(configPath)'")
+        } else {
+            // No services list at all - create one
+            let newServices = [ServiceSpec(name: name, enabled: true, version: nil, helmArgs: nil)]
+            
+            let newSpec = ClusterSpec(
+                version: spec.version,
+                metadata: spec.metadata,
+                overrides: spec.overrides,
+                kubernetes: spec.kubernetes,
+                nodes: spec.nodes ?? [],
+                network: spec.network,
+                storage: spec.storage,
+                services: newServices,
+                environment: spec.environment
+            )
+            
+            let yaml = try YAMLEncoder().encode(newSpec)
+            try yaml.write(toFile: configPath, atomically: true, encoding: String.Encoding.utf8)
+            print("Service '\(name)' added to '\(configPath)'")
         }
-        
-        // Note: Actual spec writing requires making ClusterSpec mutable
-        // This will be properly implemented in a later iteration
-        print("To persist changes, manually update '\(configPath)'")
     }
 }
 
@@ -167,41 +209,40 @@ struct ServiceRemoveCommand: ParsableCommand {
         let spec = try YAMLDecoder().decode(ClusterSpec.self, from: content)
         
         // Find the service
-        if let index = spec.services.firstIndex(where: { $0.name == name }) {
+        if let services = spec.services, let index = services.firstIndex(where: { $0.name == name }) {
             if purge {
-                var services = spec.services
-                services.remove(at: index)
+                var newServices = services
+                newServices.remove(at: index)
                 let newSpec = ClusterSpec(
                     version: spec.version,
                     metadata: spec.metadata,
                     overrides: spec.overrides,
                     kubernetes: spec.kubernetes,
-                    nodes: spec.nodes,
+                    nodes: spec.nodes ?? [],
                     network: spec.network,
                     storage: spec.storage,
-                    services: services,
+                    services: newServices,
                     environment: spec.environment
                 )
                 let yaml = try YAMLEncoder().encode(newSpec)
                 try yaml.write(toFile: configPath, atomically: true, encoding: String.Encoding.utf8)
                 print("Service '\(name)' purged from '\(configPath)'")
             } else {
-                var services = spec.services
-                services[index] = ServiceSpec(
-                    name: spec.services[index].name,
-                    enabled: false,
-                    version: spec.services[index].version,
-                    helmArgs: spec.services[index].helmArgs
-                )
+                let newServices = services.map { svc -> ServiceSpec in
+                    if svc.name == name {
+                        return ServiceSpec(name: svc.name, enabled: false, version: svc.version, helmArgs: svc.helmArgs)
+                    }
+                    return svc
+                }
                 let newSpec = ClusterSpec(
                     version: spec.version,
                     metadata: spec.metadata,
                     overrides: spec.overrides,
                     kubernetes: spec.kubernetes,
-                    nodes: spec.nodes,
+                    nodes: spec.nodes ?? [],
                     network: spec.network,
                     storage: spec.storage,
-                    services: services,
+                    services: newServices,
                     environment: spec.environment
                 )
                 let yaml = try YAMLEncoder().encode(newSpec)

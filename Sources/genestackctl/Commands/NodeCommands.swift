@@ -41,7 +41,7 @@ struct NodeListCommand: ParsableCommand {
         
         print("Name | IP | Roles | Labels")
         print("-----|----|------|-------")
-        for node in spec.nodes {
+        for node in spec.nodes ?? [] {
             let roles = node.roles.joined(separator: ",")
             let labels = node.labels?.map { "\($0.key)=\($0.value)" }.joined(separator: ",") ?? ""
             print("\(node.name) | \(node.ip) | \(roles) | \(labels)")
@@ -106,7 +106,7 @@ struct NodeAddCommand: ParsableCommand {
         }
         
         // Check for duplicate
-        if spec.nodes.contains(where: { $0.name == finalName }) {
+        if spec.nodes?.contains(where: { $0.name == finalName }) ?? false {
             print("Error: Node '\(finalName)' already exists")
             throw ValidationError("Node already exists")
         }
@@ -126,7 +126,7 @@ struct NodeAddCommand: ParsableCommand {
             metadata: spec.metadata,
             overrides: spec.overrides,
             kubernetes: spec.kubernetes,
-            nodes: spec.nodes + [newNode],
+            nodes: (spec.nodes ?? []) + [newNode],
             network: spec.network,
             storage: spec.storage,
             services: spec.services,
@@ -180,16 +180,15 @@ struct NodeRemoveCommand: ParsableCommand {
         let content = try String(contentsOfFile: configPath)
         let spec = try YAMLDecoder().decode(ClusterSpec.self, from: content)
         
-        if let index = spec.nodes.firstIndex(where: { $0.name == name }) {
-            var nodes = spec.nodes
-            nodes.remove(at: index)
+        if var nodeList = spec.nodes, let index = nodeList.firstIndex(where: { $0.name == name }) {
+            nodeList.remove(at: index)
             
             let newSpec = ClusterSpec(
                 version: spec.version,
                 metadata: spec.metadata,
                 overrides: spec.overrides,
                 kubernetes: spec.kubernetes,
-                nodes: nodes,
+                nodes: nodeList,
                 network: spec.network,
                 storage: spec.storage,
                 services: spec.services,

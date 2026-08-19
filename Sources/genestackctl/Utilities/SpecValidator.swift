@@ -72,7 +72,7 @@ class SpecValidator {
         var nodeNames: Set<String> = []
         var nodeIPs: Set<String> = []
         
-        for node in spec.nodes {
+        for node in spec.nodes ?? [] {
             // Check for duplicate names
             if nodeNames.contains(node.name) {
                 errors.append("Duplicate node name: \(node.name)")
@@ -117,7 +117,7 @@ class SpecValidator {
         var warnings: [String] = []
         
         // Warn if control-plane node also has etcd role
-        for node in spec.nodes {
+        for node in spec.nodes ?? [] {
             if node.roles.contains("control-plane") && node.roles.contains("etcd") {
                 warnings.append("Node \(node.name) has both control-plane and etcd roles (valid but consider separating)")
             }
@@ -130,7 +130,7 @@ class SpecValidator {
         var errors: [String] = []
         var serviceNames: Set<String> = []
         
-        for service in spec.services {
+        for service in spec.services ?? [] {
             if serviceNames.contains(service.name) {
                 errors.append("Duplicate service name: \(service.name)")
             }

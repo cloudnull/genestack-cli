@@ -38,7 +38,7 @@ class InventoryGenerator {
         // Build hosts dictionary
         var hosts: [String: [String: String]] = [:]
         
-        for node in spec.nodes {
+        for node in spec.nodes ?? [] {
             let addresses = node.addresses ?? [:]
             var hostVars: [String: String] = [:]
             
@@ -72,7 +72,7 @@ class InventoryGenerator {
         // Build groups
         var groups: [String: Set<String>] = [:]
         
-        for node in spec.nodes {
+        for node in spec.nodes ?? [] {
             for role in node.roles {
                 if let k8sGroups = roleToKubesprayGroups[role] {
                     for group in k8sGroups {

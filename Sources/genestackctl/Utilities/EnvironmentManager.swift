@@ -29,12 +29,13 @@ class EnvironmentManager {
         let actualOverridesDir: String
         if spec.overrides?.replaceBase == true {
             actualOverridesDir = genestackDir
+            // When replace_base is true, GENESTACK_BASE_DIR becomes the overrides dir
             env["GENESTACK_BASE_DIR"] = overridesDir
         } else {
             actualOverridesDir = overridesDir
+            env["GENESTACK_BASE_DIR"] = genestackDir
         }
         
-        env["GENESTACK_BASE_DIR"] = genestackDir
         env["GENESTACK_OVERRIDES_DIR"] = actualOverridesDir
         env["GENESTACK_SERVICES_DIR"] = "\(genestackDir)/bin/services"
         env["GENESTACK_COMPONENTS_FILE"] = "\(actualOverridesDir)/openstack-components.yaml"
