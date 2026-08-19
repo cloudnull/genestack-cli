@@ -1,0 +1,52 @@
+name: Draft Release
+
+on:
+  push:
+    branches: [main]
+    # Only trigger on merges to main (not direct pushes)
+    # GitHub handles this automatically for PR merges
+
+permissions:
+  contents: write
+
+jobs:
+  draft-release:
+    name: Draft Release
+    runs-on: ubuntu-latest
+    if: |
+      github.event_name == 'push' &&
+      !startsWith(github.ref, 'refs/tags/')
+    
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Generate changelog
+        id: changelog
+        run: |
+          # Get the latest tag or use the first commit
+          LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
+          
+          if [ -z "$LATEST_TAG" ]; then
+            # No previous tags, use first commit
+            COMMITS=$(git log --oneline $(git rev-list --max-parents=0 HEAD))
+          else
+            # Get commits since last tag
+            COMMITS=$(git log --oneline $LATEST_TAG..HEAD)
+          fi
+          
+          # Format as bullet points
+          echo "$COMMITS" | sed 's/^/- /' > changelog.txt
+          echo "changelog_file=$(pwd)/changelog.txt" >> $GITHUB_OUTPUT
+          
+      - name: Create Draft Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: next-release
+          name: Next Release (Draft)
+          body_path: ${{ steps.changelog.outputs.changelog_file }}
+          draft: true
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

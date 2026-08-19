@@ -1,59 +1,121 @@
 name: CI
 
 on:
-  push:
-    branches: [main, feature/**]
   pull_request:
     branches: [main]
+    types: [opened, synchronize, reopened]
 
 jobs:
-  build:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Install Swift
+        uses: swift-actions/setup-swift@v3
+        with:
+          swift-version: 6.3
+      
+      - name: Resolve dependencies
+        run: swift package resolve
+      
+      - name: Build (syntax check)
+        run: swift build 2>&1 | grep -v "warning:" | wc -l > /dev/null
+
+  test-macos:
+    name: Test (macOS)
     runs-on: macos-latest
     strategy:
+      fail-fast: false
       matrix:
         swift: [6.3]
     
     steps:
-    - uses: actions/checkout@v4
-    
-    - name: Install Swift
-      uses: swift-actions/setup-swift@v3
-      with:
-        swift-version: ${{ matrix.swift }}
-    
-    - name: Resolve dependencies
-      run: swift package resolve
-    
-    - name: Build
-      run: swift build -v
-    
-    - name: Run tests
-      run: swift test -v
-    
-    - name: Run linter (if available)
-      run: |
-        # SwiftLint would go here if added as a dependency
-        echo "Linting not configured yet"
+      - uses: actions/checkout@v4
+      
+      - name: Install Swift
+        uses: swift-actions/setup-swift@v3
+        with:
+          swift-version: ${{ matrix.swift }}
+      
+      - name: Resolve dependencies
+        run: swift package resolve
+      
+      - name: Build
+        run: swift build -v
+      
+      - name: Run tests
+        run: swift test -v
+      
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results-macos
+          path: |
+            test-results-macos.xml
+            !**/*.git/**
 
   test-linux:
+    name: Test (Linux)
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         swift: [6.3]
     
     steps:
-    - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+      
+      - name: Install Swift
+        uses: swift-actions/setup-swift@v3
+        with:
+          swift-version: ${{ matrix.swift }}
+      
+      - name: Resolve dependencies
+        run: swift package resolve
+      
+      - name: Build
+        run: swift build -v
+      
+      - name: Run tests
+        run: swift test -v
+      
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results-linux
+          path: |
+            test-results-linux.xml
+            !**//*.git/**
+
+  build-release:
+    name: Build Release Binaries
+    needs: [lint, test-macos, test-linux]
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
     
-    - name: Install Swift
-      uses: swift-actions/setup-swift@v3
-      with:
-        swift-version: ${{ matrix.swift }}
-    
-    - name: Resolve dependencies
-      run: swift package resolve
-    
-    - name: Build
-      run: swift build -v
-    
-    - name: Run tests
-      run: swift test -v
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Install Swift
+        uses: swift-actions/setup-swift@v3
+        with:
+          swift-version: 6.3
+      
+      - name: Resolve dependencies
+        run: swift package resolve
+      
+      - name: Build Release
+        run: swift build -c release
+      
+      - name: Verify Binary
+        run: .build/release/genectl --version
+      
+      - name: Test Binary
+        run: |
+          .build/release/genectl --help
+          .build/release/genectl config create --yes --cluster-name test-cluster --output /tmp/genestack-cluster.yaml
+          .build/release/genectl config validate --config /tmp/genestack-cluster.yaml

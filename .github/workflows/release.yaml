@@ -1,0 +1,156 @@
+name: Release
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  prepare-release:
+    name: Prepare Release
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v')
+    
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Extract version
+        id: extract_version
+        run: echo "version=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+      
+      - name: Check release exists
+        id: check_release
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { data: releases } = await github.rest.repos.listReleases({
+              owner: context.repo.owner,
+              repo: context.repo.repo
+            });
+            const release = releases.find(r => r.tag_name === `v${process.env.VERSION}`);
+            if (!release) {
+              core.setFailed(`Release v${process.env.VERSION} not found`);
+            } else {
+              core.setOutput('id', release.id);
+              core.info(`Found release v${process.env.VERSION}`);
+            }
+        env:
+          VERSION: ${{ steps.extract_version.outputs.version }}
+      
+      - name: Set up Swift
+        uses: swift-actions/setup-swift@v3
+        with:
+          swift-version: 6.3
+      
+      - name: Build Linux Binary
+        run: |
+          swift package resolve
+          swift build -c release
+      
+      - name: Strip binary
+        run: strip .build/release/genectl
+      
+      - name: Create Linux tarball
+        run: |
+          cd .build/release
+          mkdir -p genectl-linux-amd64
+          cp genectl genectl-linux-amd64/
+          tar -czf genectl-linux-amd64.tar.gz genectl-linux-amd64/
+          ls -la genectl-linux-amd64.tar.gz
+      
+      - name: Build macOS Binary
+        uses: gacts/toolchain@v2
+        with:
+          arch: x64
+          os: macos
+          swift-version: 6.3
+          bundle-path: genectl-macos-x86_64
+        run: |
+          swift package resolve
+          swift build -c release
+          cd .build/release
+          mkdir -p genectl-macos-x86_64
+          cp genectl genectl-macos-x86_64/
+          tar -czf genectl-macos-x86_64.tar.gz genectl-macos-x86_64/
+        shell: bash
+      
+      - name: Upload Linux Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: genectl-linux
+          path: .build/release/genectl-linux-amd64.tar.gz
+          retention-days: 14
+      
+      - name: Upload macOS Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: genectl-macos
+          path: .build/release/genectl-macos-x86_64.tar.gz
+          retention-days: 14
+
+  build-native-macos:
+    name: Build Native macOS Binary (ARM64)
+    runs-on: macos-latest
+    needs: prepare-release
+    if: startsWith(github.ref, 'refs/tags/v')
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up Swift
+        uses: swift-actions/setup-swift@v3
+        with:
+          swift-version: 6.3
+      
+      - name: Build Release
+        run: |
+          swift package resolve
+          swift build -c release
+      
+      - name: Strip binary
+        run: strip .build/release/genectl
+      
+      - name: Create macOS ARM64 tarball
+        run: |
+          cd .build/release
+          mkdir -p genectl-darwin-arm64
+          cp genectl genectl-darwin-arm64/
+          tar -czf genectl-darwin-arm64.tar.gz genectl-darwin-arm64/
+          ls -la genectl-darwin-arm64.tar.gz
+      
+      - name: Upload macOS ARM64 Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: genectl-darwin-arm64
+          path: .build/release/genectl-darwin-arm64.tar.gz
+          retention-days: 14
+
+  publish-release:
+    name: Publish Release Assets
+    needs: [prepare-release, build-native-macos]
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v')
+    
+    steps:
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: ./artifacts
+      
+      - name: List artifacts
+        run: |
+          find ./artifacts -name "*.tar.gz" -exec ls -la {} \;
+      
+      - name: Publish to GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            ./artifacts/genectl-linux/genectl-linux-amd64.tar.gz
+            ./artifacts/genectl-macos/genectl-macos-x86_64.tar.gz
+            ./artifacts/genectl-darwin-arm64/genectl-darwin-arm64.tar.gz
+          fail_on_unmatched_files: false
